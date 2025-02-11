@@ -10,6 +10,10 @@ pub struct InitializePositionByOperator {
     pub fee_owner: solana_sdk::pubkey::Pubkey,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xfbbdbef475fe2395")]
 pub struct InitializePositionByOperatorInstructionAccounts {
     pub payer: solana_sdk::pubkey::Pubkey,
     pub base: solana_sdk::pubkey::Pubkey,
@@ -25,7 +29,7 @@ pub struct InitializePositionByOperatorInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializePositionByOperator {
     type ArrangedAccounts = InitializePositionByOperatorInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;

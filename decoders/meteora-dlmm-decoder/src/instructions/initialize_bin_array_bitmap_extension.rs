@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0x2f9de2b40cf02147")]
 pub struct InitializeBinArrayBitmapExtension {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x2f9de2b40cf02148")]
 pub struct InitializeBinArrayBitmapExtensionInstructionAccounts {
     pub lb_pair: solana_sdk::pubkey::Pubkey,
     pub bin_array_bitmap_extension: solana_sdk::pubkey::Pubkey,
@@ -16,7 +21,7 @@ pub struct InitializeBinArrayBitmapExtensionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeBinArrayBitmapExtension {
     type ArrangedAccounts = InitializeBinArrayBitmapExtensionInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let lb_pair = accounts.get(0)?;

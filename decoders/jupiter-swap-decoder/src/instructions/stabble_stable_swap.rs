@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0x9049a3948f222890")]
 pub struct StabbleStableSwap {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x9049a3948f222891")]
 pub struct StabbleStableSwapInstructionAccounts {
     pub swap_program: solana_sdk::pubkey::Pubkey,
     pub user: solana_sdk::pubkey::Pubkey,
@@ -24,7 +29,7 @@ pub struct StabbleStableSwapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for StabbleStableSwap {
     type ArrangedAccounts = StabbleStableSwapInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let swap_program = accounts.get(0)?;

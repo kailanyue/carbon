@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0x2435e7b807b505ee")]
 pub struct SaberAddDecimals {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x2435e7b807b505e1")]
 pub struct SaberAddDecimalsInstructionAccounts {
     pub add_decimals_program: solana_sdk::pubkey::Pubkey,
     pub wrapper: solana_sdk::pubkey::Pubkey,
@@ -19,7 +24,7 @@ pub struct SaberAddDecimalsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SaberAddDecimals {
     type ArrangedAccounts = SaberAddDecimalsInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let add_decimals_program = accounts.get(0)?;

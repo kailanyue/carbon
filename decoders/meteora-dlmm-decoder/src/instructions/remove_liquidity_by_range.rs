@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -9,6 +10,10 @@ pub struct RemoveLiquidityByRange {
     pub bps_to_remove: u16,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x1a526698f04a691b")]
 pub struct RemoveLiquidityByRangeInstructionAccounts {
     pub position: solana_sdk::pubkey::Pubkey,
     pub lb_pair: solana_sdk::pubkey::Pubkey,
@@ -31,7 +36,7 @@ pub struct RemoveLiquidityByRangeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for RemoveLiquidityByRange {
     type ArrangedAccounts = RemoveLiquidityByRangeInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let position = accounts.get(0)?;

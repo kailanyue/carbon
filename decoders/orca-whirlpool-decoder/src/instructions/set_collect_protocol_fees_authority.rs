@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0x22965df48be1e943")]
 pub struct SetCollectProtocolFeesAuthority {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x22965df48be1e941")]
 pub struct SetCollectProtocolFeesAuthorityInstructionAccounts {
     pub whirlpools_config: solana_sdk::pubkey::Pubkey,
     pub collect_protocol_fees_authority: solana_sdk::pubkey::Pubkey,
@@ -14,7 +19,7 @@ pub struct SetCollectProtocolFeesAuthorityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SetCollectProtocolFeesAuthority {
     type ArrangedAccounts = SetCollectProtocolFeesAuthorityInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let whirlpools_config = accounts.get(0)?;

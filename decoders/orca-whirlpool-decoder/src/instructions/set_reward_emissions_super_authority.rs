@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0xcf05c8d17a3852b7")]
 pub struct SetRewardEmissionsSuperAuthority {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xcf05c8d17a3852b1")]
 pub struct SetRewardEmissionsSuperAuthorityInstructionAccounts {
     pub whirlpools_config: solana_sdk::pubkey::Pubkey,
     pub reward_emissions_super_authority: solana_sdk::pubkey::Pubkey,
@@ -14,7 +19,7 @@ pub struct SetRewardEmissionsSuperAuthorityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SetRewardEmissionsSuperAuthority {
     type ArrangedAccounts = SetRewardEmissionsSuperAuthorityInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let whirlpools_config = accounts.get(0)?;

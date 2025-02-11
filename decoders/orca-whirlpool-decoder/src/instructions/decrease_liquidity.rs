@@ -9,6 +9,10 @@ pub struct DecreaseLiquidity {
     pub token_min_b: u64,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xa026d06f685b2c02")]
 pub struct DecreaseLiquidityInstructionAccounts {
     pub whirlpool: solana_sdk::pubkey::Pubkey,
     pub token_program: solana_sdk::pubkey::Pubkey,
@@ -26,7 +30,7 @@ pub struct DecreaseLiquidityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for DecreaseLiquidity {
     type ArrangedAccounts = DecreaseLiquidityInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let whirlpool = accounts.get(0)?;

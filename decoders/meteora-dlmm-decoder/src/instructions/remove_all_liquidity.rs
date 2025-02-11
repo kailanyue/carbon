@@ -5,6 +5,10 @@ use carbon_core::{borsh, CarbonDeserialize};
 #[carbon(discriminator = "0x0a333d2370691855")]
 pub struct RemoveAllLiquidity {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x0a333d2370691856")]
 pub struct RemoveAllLiquidityInstructionAccounts {
     pub position: solana_sdk::pubkey::Pubkey,
     pub lb_pair: solana_sdk::pubkey::Pubkey,
@@ -27,7 +31,7 @@ pub struct RemoveAllLiquidityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for RemoveAllLiquidity {
     type ArrangedAccounts = RemoveAllLiquidityInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let position = accounts.get(0)?;

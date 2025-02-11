@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0x370935097239d134")]
 pub struct InitializeConfigExtension {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x370935097239d135")]
 pub struct InitializeConfigExtensionInstructionAccounts {
     pub config: solana_sdk::pubkey::Pubkey,
     pub config_extension: solana_sdk::pubkey::Pubkey,
@@ -16,7 +21,7 @@ pub struct InitializeConfigExtensionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeConfigExtension {
     type ArrangedAccounts = InitializeConfigExtensionInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;

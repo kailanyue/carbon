@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -8,6 +9,10 @@ pub struct SwapExactOut {
     pub out_amount: u64,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xfa49652126cf4bb9")]
 pub struct SwapExactOutInstructionAccounts {
     pub lb_pair: solana_sdk::pubkey::Pubkey,
     pub bin_array_bitmap_extension: solana_sdk::pubkey::Pubkey,
@@ -29,7 +34,7 @@ pub struct SwapExactOutInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SwapExactOut {
     type ArrangedAccounts = SwapExactOutInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let lb_pair = accounts.get(0)?;

@@ -1,14 +1,18 @@
-
-use carbon_core::{borsh, CarbonDeserialize};
 use super::super::types::*;
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x6780de8672c816c8")]
-pub struct CollectProtocolFeesV2{
+pub struct CollectProtocolFeesV2 {
     pub remaining_accounts_info: Option<RemainingAccountsInfo>,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x6780de8672c816c1")]
 pub struct CollectProtocolFeesV2InstructionAccounts {
     pub whirlpools_config: solana_sdk::pubkey::Pubkey,
     pub whirlpool: solana_sdk::pubkey::Pubkey,
@@ -27,7 +31,9 @@ pub struct CollectProtocolFeesV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CollectProtocolFeesV2 {
     type ArrangedAccounts = CollectProtocolFeesV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+    ) -> Option<Self::ArrangedAccounts> {
         let whirlpools_config = accounts.get(0)?;
         let whirlpool = accounts.get(1)?;
         let collect_protocol_fees_authority = accounts.get(2)?;

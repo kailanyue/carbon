@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0xa9dc29fa23be85c6")]
 pub struct CremaSwap {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xa9dc29fa23be85c1")]
 pub struct CremaSwapInstructionAccounts {
     pub swap_program: solana_sdk::pubkey::Pubkey,
     pub clmm_config: solana_sdk::pubkey::Pubkey,
@@ -26,7 +31,7 @@ pub struct CremaSwapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CremaSwap {
     type ArrangedAccounts = CremaSwapInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let swap_program = accounts.get(0)?;

@@ -1,11 +1,11 @@
-
-use carbon_core::{borsh, CarbonDeserialize};
 use super::super::types::*;
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xe6798f50779f6aaa")]
-pub struct SharedAccountsRouteWithTokenLedger{
+pub struct SharedAccountsRouteWithTokenLedger {
     pub id: u8,
     pub route_plan: Vec<RoutePlanStep>,
     pub quoted_out_amount: u64,
@@ -13,6 +13,10 @@ pub struct SharedAccountsRouteWithTokenLedger{
     pub platform_fee_bps: u8,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xe6798f50779f6aa1")]
 pub struct SharedAccountsRouteWithTokenLedgerInstructionAccounts {
     pub token_program: solana_sdk::pubkey::Pubkey,
     pub program_authority: solana_sdk::pubkey::Pubkey,
@@ -33,7 +37,9 @@ pub struct SharedAccountsRouteWithTokenLedgerInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SharedAccountsRouteWithTokenLedger {
     type ArrangedAccounts = SharedAccountsRouteWithTokenLedgerInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+    ) -> Option<Self::ArrangedAccounts> {
         let token_program = accounts.get(0)?;
         let program_authority = accounts.get(1)?;
         let user_transfer_authority = accounts.get(2)?;

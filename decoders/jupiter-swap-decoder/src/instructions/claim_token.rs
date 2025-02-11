@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -7,6 +8,10 @@ pub struct ClaimToken {
     pub id: u8,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x74ce1bbfa6130041")]
 pub struct ClaimTokenInstructionAccounts {
     pub payer: solana_sdk::pubkey::Pubkey,
     pub wallet: solana_sdk::pubkey::Pubkey,
@@ -22,7 +27,7 @@ pub struct ClaimTokenInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ClaimToken {
     type ArrangedAccounts = ClaimTokenInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;

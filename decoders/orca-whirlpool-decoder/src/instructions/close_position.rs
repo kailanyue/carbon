@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0x7b86510031446262")]
 pub struct ClosePosition {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x7b86510031446263")]
 pub struct ClosePositionInstructionAccounts {
     pub position_authority: solana_sdk::pubkey::Pubkey,
     pub receiver: solana_sdk::pubkey::Pubkey,
@@ -17,7 +22,7 @@ pub struct ClosePositionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ClosePosition {
     type ArrangedAccounts = ClosePositionInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let position_authority = accounts.get(0)?;

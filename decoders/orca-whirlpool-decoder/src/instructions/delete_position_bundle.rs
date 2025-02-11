@@ -5,6 +5,10 @@ use carbon_core::{borsh, CarbonDeserialize};
 #[carbon(discriminator = "0x64196302d9ef7cad")]
 pub struct DeletePositionBundle {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x64196302d9ef7ca1")]
 pub struct DeletePositionBundleInstructionAccounts {
     pub position_bundle: solana_sdk::pubkey::Pubkey,
     pub position_bundle_mint: solana_sdk::pubkey::Pubkey,
@@ -17,7 +21,7 @@ pub struct DeletePositionBundleInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for DeletePositionBundle {
     type ArrangedAccounts = DeletePositionBundleInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let position_bundle = accounts.get(0)?;

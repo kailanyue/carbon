@@ -5,6 +5,10 @@ use carbon_core::{borsh, CarbonDeserialize};
 #[carbon(discriminator = "0x0f843b32c706fb2e")]
 pub struct MigratePosition {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x0f843b32c706fb2f")]
 pub struct MigratePositionInstructionAccounts {
     pub position_v2: solana_sdk::pubkey::Pubkey,
     pub position_v1: solana_sdk::pubkey::Pubkey,
@@ -21,7 +25,7 @@ pub struct MigratePositionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for MigratePosition {
     type ArrangedAccounts = MigratePositionInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let position_v2 = accounts.get(0)?;

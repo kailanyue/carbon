@@ -9,6 +9,10 @@ pub struct AddLiquidityOneSidePrecise {
     pub parameter: AddLiquiditySingleSidePreciseParameter,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xa1c26754ab47fa9b")]
 pub struct AddLiquidityOneSidePreciseInstructionAccounts {
     pub position: solana_sdk::pubkey::Pubkey,
     pub lb_pair: solana_sdk::pubkey::Pubkey,
@@ -27,7 +31,7 @@ pub struct AddLiquidityOneSidePreciseInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for AddLiquidityOneSidePrecise {
     type ArrangedAccounts = AddLiquidityOneSidePreciseInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let position = accounts.get(0)?;

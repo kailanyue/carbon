@@ -1,5 +1,6 @@
 use super::super::types::*;
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -12,6 +13,10 @@ pub struct ExactOutRoute {
     pub platform_fee_bps: u8,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xd033ef977b2bed51")]
 pub struct ExactOutRouteInstructionAccounts {
     pub token_program: solana_sdk::pubkey::Pubkey,
     pub user_transfer_authority: solana_sdk::pubkey::Pubkey,
@@ -29,7 +34,7 @@ pub struct ExactOutRouteInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ExactOutRoute {
     type ArrangedAccounts = ExactOutRouteInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let token_program = accounts.get(0)?;

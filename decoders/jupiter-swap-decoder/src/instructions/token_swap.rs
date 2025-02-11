@@ -5,6 +5,10 @@ use carbon_core::{borsh, CarbonDeserialize};
 #[carbon(discriminator = "0xbbc076d43e6d1cd5")]
 pub struct TokenSwap {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xbbc076d43e6d1cd1")]
 pub struct TokenSwapInstructionAccounts {
     pub token_swap_program: solana_sdk::pubkey::Pubkey,
     pub token_program: solana_sdk::pubkey::Pubkey,
@@ -22,7 +26,7 @@ pub struct TokenSwapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TokenSwap {
     type ArrangedAccounts = TokenSwapInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let token_swap_program = accounts.get(0)?;

@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0x7be5b83f0c005c91")]
 pub struct WhirlpoolSwap {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x7be5b83f0c005c92")]
 pub struct WhirlpoolSwapInstructionAccounts {
     pub swap_program: solana_sdk::pubkey::Pubkey,
     pub token_program: solana_sdk::pubkey::Pubkey,
@@ -23,7 +28,7 @@ pub struct WhirlpoolSwapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WhirlpoolSwap {
     type ArrangedAccounts = WhirlpoolSwapInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let swap_program = accounts.get(0)?;

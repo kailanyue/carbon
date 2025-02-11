@@ -1,10 +1,15 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0xfd4dcd5f1be059df")]
 pub struct InitializeTokenBadge {}
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xfd4dcd5f1be059d1")]
 pub struct InitializeTokenBadgeInstructionAccounts {
     pub whirlpools_config: solana_sdk::pubkey::Pubkey,
     pub whirlpools_config_extension: solana_sdk::pubkey::Pubkey,
@@ -18,7 +23,7 @@ pub struct InitializeTokenBadgeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeTokenBadge {
     type ArrangedAccounts = InitializeTokenBadgeInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let whirlpools_config = accounts.get(0)?;

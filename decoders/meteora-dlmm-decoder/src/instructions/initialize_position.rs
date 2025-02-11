@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -8,6 +9,10 @@ pub struct InitializePosition {
     pub width: i32,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xdbc0ea47bebf6651")]
 pub struct InitializePositionInstructionAccounts {
     pub payer: solana_sdk::pubkey::Pubkey,
     pub position: solana_sdk::pubkey::Pubkey,
@@ -22,7 +27,7 @@ pub struct InitializePositionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializePosition {
     type ArrangedAccounts = InitializePositionInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;

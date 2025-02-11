@@ -1,11 +1,11 @@
-
-use carbon_core::{borsh, CarbonDeserialize};
 use super::super::types::*;
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xba8fd11dfe02c275")]
-pub struct TwoHopSwapV2{
+pub struct TwoHopSwapV2 {
     pub amount: u64,
     pub other_amount_threshold: u64,
     pub amount_specified_is_input: bool,
@@ -16,6 +16,10 @@ pub struct TwoHopSwapV2{
     pub remaining_accounts_info: Option<RemainingAccountsInfo>,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xba8fd11dfe02c271")]
 pub struct TwoHopSwapV2InstructionAccounts {
     pub whirlpool_one: solana_sdk::pubkey::Pubkey,
     pub whirlpool_two: solana_sdk::pubkey::Pubkey,
@@ -46,7 +50,9 @@ pub struct TwoHopSwapV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TwoHopSwapV2 {
     type ArrangedAccounts = TwoHopSwapV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+    ) -> Option<Self::ArrangedAccounts> {
         let whirlpool_one = accounts.get(0)?;
         let whirlpool_two = accounts.get(1)?;
         let token_mint_input = accounts.get(2)?;

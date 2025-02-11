@@ -9,6 +9,10 @@ pub struct InitializePresetParameter {
     pub ix: InitPresetParametersIx,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x42bc47d3626d0ebb")]
 pub struct InitializePresetParameterInstructionAccounts {
     pub preset_parameter: solana_sdk::pubkey::Pubkey,
     pub admin: solana_sdk::pubkey::Pubkey,
@@ -19,7 +23,7 @@ pub struct InitializePresetParameterInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializePresetParameter {
     type ArrangedAccounts = InitializePresetParameterInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let preset_parameter = accounts.get(0)?;

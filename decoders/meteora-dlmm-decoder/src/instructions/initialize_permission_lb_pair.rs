@@ -9,6 +9,10 @@ pub struct InitializePermissionLbPair {
     pub ix_data: InitPermissionPairIx,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x6c66d555fb033516")]
 pub struct InitializePermissionLbPairInstructionAccounts {
     pub base: solana_sdk::pubkey::Pubkey,
     pub lb_pair: solana_sdk::pubkey::Pubkey,
@@ -29,7 +33,7 @@ pub struct InitializePermissionLbPairInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializePermissionLbPair {
     type ArrangedAccounts = InitializePermissionLbPairInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let base = accounts.get(0)?;

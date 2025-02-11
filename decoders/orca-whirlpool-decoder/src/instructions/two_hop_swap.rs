@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -13,6 +14,10 @@ pub struct TwoHopSwap {
     pub sqrt_price_limit_two: u128,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xc360ed6c44a2dbe1")]
 pub struct TwoHopSwapInstructionAccounts {
     pub token_program: solana_sdk::pubkey::Pubkey,
     pub token_authority: solana_sdk::pubkey::Pubkey,
@@ -39,7 +44,7 @@ pub struct TwoHopSwapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TwoHopSwap {
     type ArrangedAccounts = TwoHopSwapInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let token_program = accounts.get(0)?;

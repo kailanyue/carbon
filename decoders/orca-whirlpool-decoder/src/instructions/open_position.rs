@@ -1,16 +1,20 @@
-
-use carbon_core::{borsh, CarbonDeserialize};
 use super::super::types::*;
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x87802f4d0f98f031")]
-pub struct OpenPosition{
+pub struct OpenPosition {
     pub bumps: OpenPositionBumps,
     pub tick_lower_index: i32,
     pub tick_upper_index: i32,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x87802f4d0f98f032")]
 pub struct OpenPositionInstructionAccounts {
     pub funder: solana_sdk::pubkey::Pubkey,
     pub owner: solana_sdk::pubkey::Pubkey,
@@ -27,7 +31,9 @@ pub struct OpenPositionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for OpenPosition {
     type ArrangedAccounts = OpenPositionInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+    ) -> Option<Self::ArrangedAccounts> {
         let funder = accounts.get(0)?;
         let owner = accounts.get(1)?;
         let position = accounts.get(2)?;

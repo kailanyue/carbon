@@ -1,5 +1,6 @@
 use super::super::types::*;
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -13,6 +14,10 @@ pub struct SharedAccountsRoute {
     pub platform_fee_bps: u8,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xc1209b3341d69c82")]
 pub struct SharedAccountsRouteInstructionAccounts {
     pub token_program: solana_sdk::pubkey::Pubkey,
     pub program_authority: solana_sdk::pubkey::Pubkey,
@@ -32,7 +37,7 @@ pub struct SharedAccountsRouteInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SharedAccountsRoute {
     type ArrangedAccounts = SharedAccountsRouteInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let token_program = accounts.get(0)?;

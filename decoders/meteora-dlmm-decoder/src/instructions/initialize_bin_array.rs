@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -7,6 +8,10 @@ pub struct InitializeBinArray {
     pub index: i64,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x235613b94ed44bd4")]
 pub struct InitializeBinArrayInstructionAccounts {
     pub lb_pair: solana_sdk::pubkey::Pubkey,
     pub bin_array: solana_sdk::pubkey::Pubkey,
@@ -17,7 +22,7 @@ pub struct InitializeBinArrayInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeBinArray {
     type ArrangedAccounts = InitializeBinArrayInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let lb_pair = accounts.get(0)?;

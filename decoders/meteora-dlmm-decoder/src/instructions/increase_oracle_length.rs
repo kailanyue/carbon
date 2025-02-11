@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -7,6 +8,10 @@ pub struct IncreaseOracleLength {
     pub length_to_add: u64,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xbe3d7d57674f9eae")]
 pub struct IncreaseOracleLengthInstructionAccounts {
     pub oracle: solana_sdk::pubkey::Pubkey,
     pub funder: solana_sdk::pubkey::Pubkey,
@@ -18,7 +23,7 @@ pub struct IncreaseOracleLengthInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for IncreaseOracleLength {
     type ArrangedAccounts = IncreaseOracleLengthInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let oracle = accounts.get(0)?;

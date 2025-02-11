@@ -9,6 +9,10 @@ pub struct AddLiquidityByStrategy {
     pub liquidity_parameter: LiquidityParameterByStrategy,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x0703967f94283dc1")]
 pub struct AddLiquidityByStrategyInstructionAccounts {
     pub position: solana_sdk::pubkey::Pubkey,
     pub lb_pair: solana_sdk::pubkey::Pubkey,
@@ -31,7 +35,7 @@ pub struct AddLiquidityByStrategyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for AddLiquidityByStrategy {
     type ArrangedAccounts = AddLiquidityByStrategyInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let position = accounts.get(0)?;

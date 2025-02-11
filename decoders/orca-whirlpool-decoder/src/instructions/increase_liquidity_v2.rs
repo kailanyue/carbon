@@ -1,17 +1,21 @@
-
-use carbon_core::{borsh, CarbonDeserialize};
 use super::super::types::*;
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x851d59df45eeb00a")]
-pub struct IncreaseLiquidityV2{
+pub struct IncreaseLiquidityV2 {
     pub liquidity_amount: u128,
     pub token_max_a: u64,
     pub token_max_b: u64,
     pub remaining_accounts_info: Option<RemainingAccountsInfo>,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x851d59df45eeb001")]
 pub struct IncreaseLiquidityV2InstructionAccounts {
     pub whirlpool: solana_sdk::pubkey::Pubkey,
     pub token_program_a: solana_sdk::pubkey::Pubkey,
@@ -33,7 +37,9 @@ pub struct IncreaseLiquidityV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for IncreaseLiquidityV2 {
     type ArrangedAccounts = IncreaseLiquidityV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+    ) -> Option<Self::ArrangedAccounts> {
         let whirlpool = accounts.get(0)?;
         let token_program_a = accounts.get(1)?;
         let token_program_b = accounts.get(2)?;

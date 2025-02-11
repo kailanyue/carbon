@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -7,6 +8,10 @@ pub struct SetDefaultFeeRate {
     pub default_fee_rate: u16,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x76d7d69db6e5d0e1")]
 pub struct SetDefaultFeeRateInstructionAccounts {
     pub whirlpools_config: solana_sdk::pubkey::Pubkey,
     pub fee_tier: solana_sdk::pubkey::Pubkey,
@@ -16,7 +21,7 @@ pub struct SetDefaultFeeRateInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SetDefaultFeeRate {
     type ArrangedAccounts = SetDefaultFeeRateInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let whirlpools_config = accounts.get(0)?;

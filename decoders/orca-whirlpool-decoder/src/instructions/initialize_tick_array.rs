@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -7,6 +8,10 @@ pub struct InitializeTickArray {
     pub start_tick_index: i32,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x0bbcc1d68d5b95b1")]
 pub struct InitializeTickArrayInstructionAccounts {
     pub whirlpool: solana_sdk::pubkey::Pubkey,
     pub funder: solana_sdk::pubkey::Pubkey,
@@ -17,7 +22,7 @@ pub struct InitializeTickArrayInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeTickArray {
     type ArrangedAccounts = InitializeTickArrayInstructionAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let whirlpool = accounts.get(0)?;
