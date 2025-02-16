@@ -150,7 +150,7 @@ impl Processor for MyAccountProcessor {
 
 ### Implementing a Datasource
 
-For most use cases, we recommend chosing from one of our datasource crates:
+For most use cases, we recommend choosing from one of our datasource crates:
 | Crate Name | Description | Affordability | Ease of Setup |
 |------------|-------------|---------------|----------------|
 | `carbon-block-subscribe` | Uses `blockSubscribe` with Solana WS JSON RPC to listen to real-time on-chain transactions | Cheap (just RPC) | Easy |
@@ -197,6 +197,7 @@ Decoders for most popular Solana programs are published and maintained:
 | `carbon-orca-whirlpool-decoder` | Orca Whirlpool Program Decoder | whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc |
 | `carbon-pumpfun-decoder` | Pumpfun Program Decoder | 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P |
 | `carbon-raydium-amm-v4-decoder` | Raydium AMM V4 Program Decoder | 675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8 |
+| `carbon-raydium-clmm-decoder` | Raydium CLMM Program Decoder | CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK |
 | `carbon-system-program-decoder` | System Program Decoder | 11111111111111111111111111111111 |
 | `carbon-token-program-decoder` | Token Program Decoder | TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA |
 | `carbon-kamino-lend-decoder` | Kamino Lend Decoder | KLend2g3cP87fffoy8q1mQqGKjrxjC8boSyAYavgmjD |

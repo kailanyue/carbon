@@ -5,6 +5,7 @@ use carbon_core::{borsh, CarbonDeserialize};
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 #[carbon(discriminator = "0x8080d05bf6351fb0")]
+
 pub struct UpdateFeeParameters {
     pub fee_parameter: FeeParameter,
 }
