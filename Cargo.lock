@@ -843,7 +843,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-cli"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "anyhow",
  "askama",
@@ -866,7 +866,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-core"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "async-trait",
  "borsh 0.10.4",
@@ -887,7 +887,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-helius-atlas-ws-datasource"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "async-trait",
  "bincode",
@@ -906,7 +906,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-jupiter-dca-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -915,7 +915,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-jupiter-limit-order-2-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -924,7 +924,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-jupiter-limit-order-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -933,7 +933,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-jupiter-swap-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -942,7 +942,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-kamino-lending-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -952,7 +952,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-kamino-vault-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -962,7 +962,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-log-metrics"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -972,7 +972,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-macros"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "hex",
  "paste",
@@ -983,7 +983,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-memo-program-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -994,7 +994,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-meteora-dlmm-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1004,7 +1004,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-mpl-core-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1013,7 +1013,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-mpl-token-metadata-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1021,8 +1021,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "carbon-openbook-v2-decoder"
+version = "0.4.1"
+dependencies = [
+ "carbon-core",
+ "serde",
+ "serde-big-array",
+ "solana-sdk",
+]
+
+[[package]]
 name = "carbon-orca-whirlpool-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1031,7 +1041,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-proc-macros"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "borsh-derive-internal",
  "hex",
@@ -1048,7 +1058,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-prometheus-metrics"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -1060,7 +1070,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-pumpfun-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1069,7 +1079,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-raydium-amm-v4-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1079,7 +1089,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-raydium-clmm-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1090,7 +1100,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-rpc-block-subscribe-datasource"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -1105,7 +1115,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-rpc-program-subscribe-datasource"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -1120,7 +1130,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-rpc-transaction-crawler-datasource"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "async-stream",
  "async-trait",
@@ -1139,7 +1149,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-sharky-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1149,7 +1159,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-system-program-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1159,7 +1169,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-token-program-decoder"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1169,7 +1179,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-yellowstone-grpc-datasource"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -2275,8 +2285,7 @@ checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
 [[package]]
 name = "helius"
 version = "0.2.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f7cb56a9faf2bf6b9f06aca82a510b19d650705d97c229e4d3be08c8c453545d"
+source = "git+https://github.com/helius-labs/helius-rust-sdk.git#73b51185e645c4f8928eb56a8ce683675f3c9824"
 dependencies = [
  "base64 0.22.1",
  "bincode",
@@ -3426,6 +3435,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c08d65885ee38876c4f86fa503fb49d7b507c2b62552df7c70b2fce627e06381"
 
 [[package]]
+name = "openbook-v2-alerts-carbon-example"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "carbon-core",
+ "carbon-log-metrics",
+ "carbon-openbook-v2-decoder",
+ "carbon-rpc-block-subscribe-datasource",
+ "dotenv",
+ "env_logger",
+ "log",
+ "solana-client",
+ "solana-sdk",
+ "solana-transaction-status",
+ "tokio",
+]
+
+[[package]]
 name = "openssl"
 version = "0.10.71"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3778,6 +3805,7 @@ dependencies = [
  "carbon-yellowstone-grpc-datasource",
  "dotenvy",
  "env_logger",
+ "helius",
  "log",
  "solana-client",
  "solana-sdk",
@@ -6723,9 +6751,9 @@ dependencies = [
 
 [[package]]
 name = "typenum"
-version = "1.17.0"
+version = "1.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "42ff0bf0c66b8238c6f3b578df37d0b7848e55df8577b3f74f92a69acceeb825"
+checksum = "1dccffe3ce07af9386bfd29e80c0ab1a8205a2fc34e4bcd40364df902cfa8f3f"
 
 [[package]]
 name = "unicase"

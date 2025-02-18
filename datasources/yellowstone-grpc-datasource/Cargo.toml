@@ -2,7 +2,7 @@
 name = "carbon-yellowstone-grpc-datasource"
 description = "Yellowstone gRPC Datasource"
 license = "MIT"
-version = "0.4.0"
+version = "0.4.1"
 edition = "2021"
 
 [lib]
@@ -15,12 +15,12 @@ solana-client = { workspace = true }
 
 carbon-core = { workspace = true }
 
-yellowstone-grpc-proto = { version = "5" }
-yellowstone-grpc-client = { version = "5" }
+yellowstone-grpc-proto = { workspace = true }
+yellowstone-grpc-client = { workspace = true }
 futures = "0.3"
 futures-util = "0.3"
-tokio = { version = "1.43", features = ["full"] }
-async-trait = "0.1"
-log = "0.4"
-env_logger = "0.11"
-tokio-util = "0.7"
+tokio = { workspace = true, features = ["full"] }
+async-trait = { workspace = true }
+log = "0.4.22"
+env_logger = "0.11.5"
+tokio-util = "0.7.12"

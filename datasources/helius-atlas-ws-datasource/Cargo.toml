@@ -2,7 +2,7 @@
 name = "carbon-helius-atlas-ws-datasource"
 description = "Helius Atlas WebSocket Datasource"
 license = "MIT"
-version = "0.4.0"
+version = "0.4.1"
 edition = "2021"
 
 [lib]
@@ -13,12 +13,12 @@ solana-transaction-status = { workspace = true }
 solana-client = { workspace = true }
 solana-sdk = { workspace = true }
 solana-account-decoder = { workspace = true }
-helius = { version = "0.2.2" }
+helius = { workspace = true }
 bincode = "1.3.3"
 
 carbon-core = { workspace = true }
 
-tokio = { version = "1.43", features = ["full"] }
+tokio = { workspace = true, features = ["full"] }
 tokio-util = "0.7"
 async-trait = "0.1"
 log = "0.4"

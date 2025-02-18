@@ -11,9 +11,10 @@ solana-client = { workspace = true }
 carbon-yellowstone-grpc-datasource = { workspace = true }
 carbon-pumpfun-decoder = { workspace = true }
 
-tokio = { version = "1.43", features = ["full"] }
-async-trait = "0.1.83"
-log = "0.4.22"
-env_logger = "0.11.5"
-dotenvy = "0.15.0"
+helius = { workspace = true }
+tokio = { workspace = true, features = ["full"] }
+async-trait = { workspace = true }
+log = "0.4"
+env_logger = "0.11"
+dotenvy = "0.15"
 yellowstone-grpc-proto = { version = "5" }

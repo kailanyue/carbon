@@ -1,15 +1,15 @@
 [package]
 name = "carbon-sharky-decoder"
-version = "0.4.0"
+version = "0.4.1"
 description = "Sharky Decoder"
 license = "MIT"
-edition = "2018"
+edition = "2021"
 
 [lib]
 crate-type = ["rlib"]
 
 [dependencies]
 carbon-core = { workspace = true }
-solana-sdk = "2.0.10"
+solana-sdk = { workspace = true }
 serde = "1.0.136"
 spl-token = "6.0.0"
