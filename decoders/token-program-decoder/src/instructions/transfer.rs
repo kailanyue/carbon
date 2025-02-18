@@ -8,6 +8,7 @@ pub struct Transfer {
     pub amount: u64,
 }
 
+#[derive(Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone)]
 pub struct TransferAccounts {
     pub source: solana_sdk::pubkey::Pubkey,
     pub destination: solana_sdk::pubkey::Pubkey,
@@ -18,7 +19,7 @@ pub struct TransferAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Transfer {
     type ArrangedAccounts = TransferAccounts;
 
-fn arrange_accounts(
+    fn arrange_accounts(
         accounts: Vec<solana_sdk::instruction::AccountMeta>,
     ) -> Option<Self::ArrangedAccounts> {
         let source = accounts.get(0)?;
