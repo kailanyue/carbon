@@ -10,10 +10,7 @@ pub struct AddLiquidityByStrategyOneSide {
     pub liquidity_parameter: LiquidityParameterByStrategyOneSide,
 }
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
-#[carbon(discriminator = "0x2905eeaf64e106c1")]
+#[derive(Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone)]
 pub struct AddLiquidityByStrategyOneSideInstructionAccounts {
     pub position: solana_sdk::pubkey::Pubkey,
     pub lb_pair: solana_sdk::pubkey::Pubkey,
@@ -27,6 +24,7 @@ pub struct AddLiquidityByStrategyOneSideInstructionAccounts {
     pub token_program: solana_sdk::pubkey::Pubkey,
     pub event_authority: solana_sdk::pubkey::Pubkey,
     pub program: solana_sdk::pubkey::Pubkey,
+    pub remaining_accounts: Vec<solana_sdk::instruction::AccountMeta>,
 }
 
 impl carbon_core::deserialize::ArrangeAccounts for AddLiquidityByStrategyOneSide {
@@ -35,7 +33,7 @@ impl carbon_core::deserialize::ArrangeAccounts for AddLiquidityByStrategyOneSide
     fn arrange_accounts(
         accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let [position, lb_pair, bin_array_bitmap_extension, user_token, reserve, token_mint, bin_array_lower, bin_array_upper, sender, token_program, event_authority, program] =
+        let [position, lb_pair, bin_array_bitmap_extension, user_token, reserve, token_mint, bin_array_lower, bin_array_upper, sender, token_program, event_authority, program, remaining_accounts @ ..] =
             accounts
         else {
             return None;
@@ -54,6 +52,7 @@ impl carbon_core::deserialize::ArrangeAccounts for AddLiquidityByStrategyOneSide
             token_program: token_program.pubkey,
             event_authority: event_authority.pubkey,
             program: program.pubkey,
+            remaining_accounts: remaining_accounts.to_vec(),
         })
     }
 }

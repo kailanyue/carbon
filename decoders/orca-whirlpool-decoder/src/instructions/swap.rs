@@ -12,10 +12,7 @@ pub struct Swap {
     pub a_to_b: bool,
 }
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
-#[carbon(discriminator = "0xf8c69e91e17587c1")]
+#[derive(Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone)]
 pub struct SwapInstructionAccounts {
     pub token_program: solana_sdk::pubkey::Pubkey,
     pub token_authority: solana_sdk::pubkey::Pubkey,
@@ -28,6 +25,7 @@ pub struct SwapInstructionAccounts {
     pub tick_array1: solana_sdk::pubkey::Pubkey,
     pub tick_array2: solana_sdk::pubkey::Pubkey,
     pub oracle: solana_sdk::pubkey::Pubkey,
+    pub remaining_accounts: Vec<solana_sdk::instruction::AccountMeta>,
 }
 
 impl carbon_core::deserialize::ArrangeAccounts for Swap {
@@ -36,7 +34,7 @@ impl carbon_core::deserialize::ArrangeAccounts for Swap {
     fn arrange_accounts(
         accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let [token_program, token_authority, whirlpool, token_owner_account_a, token_vault_a, token_owner_account_b, token_vault_b, tick_array0, tick_array1, tick_array2, oracle] =
+        let [token_program, token_authority, whirlpool, token_owner_account_a, token_vault_a, token_owner_account_b, token_vault_b, tick_array0, tick_array1, tick_array2, oracle, remaining_accounts @ ..] =
             accounts
         else {
             return None;
@@ -54,6 +52,7 @@ impl carbon_core::deserialize::ArrangeAccounts for Swap {
             tick_array1: tick_array1.pubkey,
             tick_array2: tick_array2.pubkey,
             oracle: oracle.pubkey,
+            remaining_accounts: remaining_accounts.to_vec(),
         })
     }
 }

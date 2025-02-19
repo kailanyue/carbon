@@ -26,7 +26,8 @@ impl carbon_core::deserialize::ArrangeAccounts for IncreaseOracleLength {
     fn arrange_accounts(
         accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let [oracle, funder, system_program, event_authority, program] = accounts else {
+        let [oracle, funder, system_program, event_authority, program, _remaining @ ..] = accounts
+        else {
             return None;
         };
 

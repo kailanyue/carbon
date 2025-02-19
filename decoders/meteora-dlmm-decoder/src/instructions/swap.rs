@@ -9,10 +9,7 @@ pub struct Swap {
     pub min_amount_out: u64,
 }
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
-#[carbon(discriminator = "0xf8c69e91e17587c1")]
+#[derive(Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone)]
 pub struct SwapInstructionAccounts {
     pub lb_pair: solana_sdk::pubkey::Pubkey,
     pub bin_array_bitmap_extension: solana_sdk::pubkey::Pubkey,
@@ -29,6 +26,7 @@ pub struct SwapInstructionAccounts {
     pub token_y_program: solana_sdk::pubkey::Pubkey,
     pub event_authority: solana_sdk::pubkey::Pubkey,
     pub program: solana_sdk::pubkey::Pubkey,
+    pub remaining_accounts: Vec<solana_sdk::instruction::AccountMeta>,
 }
 
 impl carbon_core::deserialize::ArrangeAccounts for Swap {
@@ -37,7 +35,7 @@ impl carbon_core::deserialize::ArrangeAccounts for Swap {
     fn arrange_accounts(
         accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let [lb_pair, bin_array_bitmap_extension, reserve_x, reserve_y, user_token_in, user_token_out, token_x_mint, token_y_mint, oracle, host_fee_in, user, token_x_program, token_y_program, event_authority, program] =
+        let [lb_pair, bin_array_bitmap_extension, reserve_x, reserve_y, user_token_in, user_token_out, token_x_mint, token_y_mint, oracle, host_fee_in, user, token_x_program, token_y_program, event_authority, program, remaining_accounts @ ..] =
             accounts
         else {
             return None;
@@ -59,6 +57,7 @@ impl carbon_core::deserialize::ArrangeAccounts for Swap {
             token_y_program: token_y_program.pubkey,
             event_authority: event_authority.pubkey,
             program: program.pubkey,
+            remaining_accounts: remaining_accounts.to_vec(),
         })
     }
 }
