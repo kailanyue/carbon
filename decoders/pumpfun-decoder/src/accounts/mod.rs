@@ -12,7 +12,7 @@ pub enum PumpfunAccount {
     BondingCurve(bonding_curve::BondingCurve),
 }
 
-impl<'a> AccountDecoder<'a> for PumpfunDecoder {
+impl AccountDecoder<'_> for PumpfunDecoder { 
     type AccountType = PumpfunAccount;
     fn decode_account(
         &self,

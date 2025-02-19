@@ -23,14 +23,13 @@ impl carbon_core::deserialize::ArrangeAccounts for ClosePosition {
     type ArrangedAccounts = ClosePositionInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let position_authority = accounts.get(0)?;
-        let receiver = accounts.get(1)?;
-        let position = accounts.get(2)?;
-        let position_mint = accounts.get(3)?;
-        let position_token_account = accounts.get(4)?;
-        let token_program = accounts.get(5)?;
+        let [position_authority, receiver, position, position_mint, position_token_account, token_program] =
+            accounts
+        else {
+            return None;
+        };
 
         Some(ClosePositionInstructionAccounts {
             position_authority: position_authority.pubkey,

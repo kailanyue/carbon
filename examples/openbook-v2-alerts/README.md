@@ -1,6 +1,6 @@
 # Carbon Pipeline Example
 
-This project demonstrates how to set up and run a Carbon pipeline that processes Solana transactions. It uses the `RpcBlockSubscribe` to fetch Solana transactions related to a specific program and processes these transactions using the `OpenbookV2ClmmDecoder`. The example demonstrates how to decode OpenbookV2 instructions and implement a custom processor for handling various types of events.
+This project demonstrates how to set up and run a Carbon pipeline that processes Solana transactions. It uses the `RpcBlockSubscribe` to fetch Solana transactions related to a specific program and processes these transactions using the `OpenbookV2Decoder`. The example demonstrates how to decode OpenbookV2 instructions and implement a custom processor for handling various types of events.
 
 ## Setup Instructions
 
@@ -39,7 +39,7 @@ After building the project, you can run the pipeline using:
 cargo run --release
 ```
 
-This will start the block subscriber, and the pipeline will begin processing transactions for the specified program ID (`OPENBOOK_V2_CLMM_PROGRAM_ID`).
+This will start the block subscriber, and the pipeline will begin processing transactions for the specified program ID (`OPENBOOK_V2_PROGRAM_ID`).
 
 ## Metrics
 

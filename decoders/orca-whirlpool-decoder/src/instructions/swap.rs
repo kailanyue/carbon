@@ -34,19 +34,13 @@ impl carbon_core::deserialize::ArrangeAccounts for Swap {
     type ArrangedAccounts = SwapInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let token_program = accounts.get(0)?;
-        let token_authority = accounts.get(1)?;
-        let whirlpool = accounts.get(2)?;
-        let token_owner_account_a = accounts.get(3)?;
-        let token_vault_a = accounts.get(4)?;
-        let token_owner_account_b = accounts.get(5)?;
-        let token_vault_b = accounts.get(6)?;
-        let tick_array0 = accounts.get(7)?;
-        let tick_array1 = accounts.get(8)?;
-        let tick_array2 = accounts.get(9)?;
-        let oracle = accounts.get(10)?;
+        let [token_program, token_authority, whirlpool, token_owner_account_a, token_vault_a, token_owner_account_b, token_vault_b, tick_array0, tick_array1, tick_array2, oracle] =
+            accounts
+        else {
+            return None;
+        };
 
         Some(SwapInstructionAccounts {
             token_program: token_program.pubkey,

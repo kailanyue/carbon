@@ -20,11 +20,11 @@ impl carbon_core::deserialize::ArrangeAccounts for CreateTokenLedger {
     type ArrangedAccounts = CreateTokenLedgerInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let token_ledger = accounts.get(0)?;
-        let payer = accounts.get(1)?;
-        let system_program = accounts.get(2)?;
+        let [token_ledger, payer, system_program] = accounts else {
+            return None;
+        };
 
         Some(CreateTokenLedgerInstructionAccounts {
             token_ledger: token_ledger.pubkey,

@@ -30,17 +30,13 @@ impl carbon_core::deserialize::ArrangeAccounts for CollectRewardV2 {
     type ArrangedAccounts = CollectRewardV2InstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let whirlpool = accounts.get(0)?;
-        let position_authority = accounts.get(1)?;
-        let position = accounts.get(2)?;
-        let position_token_account = accounts.get(3)?;
-        let reward_owner_account = accounts.get(4)?;
-        let reward_mint = accounts.get(5)?;
-        let reward_vault = accounts.get(6)?;
-        let reward_token_program = accounts.get(7)?;
-        let memo_program = accounts.get(8)?;
+        let [whirlpool, position_authority, position, position_token_account, reward_owner_account, reward_mint, reward_vault, reward_token_program, memo_program] =
+            accounts
+        else {
+            return None;
+        };
 
         Some(CollectRewardV2InstructionAccounts {
             whirlpool: whirlpool.pubkey,

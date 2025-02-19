@@ -1,10 +1,11 @@
 use super::super::types::*;
+
 use carbon_core::{borsh, CarbonDeserialize};
 
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
-#[carbon(discriminator = "0x0c")]
+#[carbon(discriminator = "0xc34b6848fdb0b7a0")]
 pub struct SimulateInfo {
     pub param: u8,
     pub swap_base_in_value: Option<SwapInstructionBaseIn>,
@@ -30,16 +31,13 @@ impl carbon_core::deserialize::ArrangeAccounts for SimulateInfo {
     type ArrangedAccounts = SimulateInfoInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let amm = accounts.get(0)?;
-        let amm_authority = accounts.get(1)?;
-        let amm_open_orders = accounts.get(2)?;
-        let pool_coin_token_account = accounts.get(3)?;
-        let pool_pc_token_account = accounts.get(4)?;
-        let lp_mint_address = accounts.get(5)?;
-        let serum_market = accounts.get(6)?;
-        let serum_event_queue = accounts.get(7)?;
+        let [amm, amm_authority, amm_open_orders, pool_coin_token_account, pool_pc_token_account, lp_mint_address, serum_market, serum_event_queue] =
+            accounts
+        else {
+            return None;
+        };
 
         Some(SimulateInfoInstructionAccounts {
             amm: amm.pubkey,

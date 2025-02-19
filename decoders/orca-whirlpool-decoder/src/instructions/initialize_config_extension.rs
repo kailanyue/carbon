@@ -22,13 +22,11 @@ impl carbon_core::deserialize::ArrangeAccounts for InitializeConfigExtension {
     type ArrangedAccounts = InitializeConfigExtensionInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let config = accounts.get(0)?;
-        let config_extension = accounts.get(1)?;
-        let funder = accounts.get(2)?;
-        let fee_authority = accounts.get(3)?;
-        let system_program = accounts.get(4)?;
+        let [config, config_extension, funder, fee_authority, system_program] = accounts else {
+            return None;
+        };
 
         Some(InitializeConfigExtensionInstructionAccounts {
             config: config.pubkey,

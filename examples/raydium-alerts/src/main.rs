@@ -106,7 +106,7 @@ impl Processor for RaydiumAmmV4InstructionProcessor {
                 );
             }
             RaydiumAmmV4Instruction::SwapBaseIn(swap) => {
-                let arranged_accounts = SwapBaseIn::arrange_accounts(accounts);
+                let arranged_accounts = SwapBaseIn::arrange_accounts(&accounts);
                 println!("\nsignature: {:#?}\n SwapIn: {:#?}", signature, swap);
                 println!(" arranged_accounts: {:#?}", arranged_accounts);
             }

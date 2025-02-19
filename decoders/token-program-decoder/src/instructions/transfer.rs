@@ -20,11 +20,11 @@ impl carbon_core::deserialize::ArrangeAccounts for Transfer {
     type ArrangedAccounts = TransferAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let source = accounts.get(0)?;
-        let destination = accounts.get(1)?;
-        let authority = accounts.get(2)?;
+        let [source, destination, authority] = accounts else {
+            return None;
+        };
 
         Some(TransferAccounts {
             source: source.pubkey,

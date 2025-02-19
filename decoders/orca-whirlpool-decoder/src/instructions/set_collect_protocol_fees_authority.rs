@@ -20,11 +20,13 @@ impl carbon_core::deserialize::ArrangeAccounts for SetCollectProtocolFeesAuthori
     type ArrangedAccounts = SetCollectProtocolFeesAuthorityInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let whirlpools_config = accounts.get(0)?;
-        let collect_protocol_fees_authority = accounts.get(1)?;
-        let new_collect_protocol_fees_authority = accounts.get(2)?;
+        let [whirlpools_config, collect_protocol_fees_authority, new_collect_protocol_fees_authority] =
+            accounts
+        else {
+            return None;
+        };
 
         Some(SetCollectProtocolFeesAuthorityInstructionAccounts {
             whirlpools_config: whirlpools_config.pubkey,

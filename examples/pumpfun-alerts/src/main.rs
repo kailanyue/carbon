@@ -111,7 +111,7 @@ impl Processor for PumpfunInstructionProcessor {
                 println!("\n signature: {:#?}\n Buy: {:#?}", signature, buy);
                 println!(
                     "\n Buy ArrangedAccounts: {:#?}\n",
-                    Buy::arrange_accounts(accounts)
+                    Buy::arrange_accounts(&accounts)
                 );
             }
 
@@ -119,7 +119,7 @@ impl Processor for PumpfunInstructionProcessor {
                 println!("\n signature: {:#?}\n Sell: {:#?}", signature, sell);
                 println!(
                     "\n Sell ArrangedAccounts: {:#?}\n",
-                    Sell::arrange_accounts(accounts)
+                    Sell::arrange_accounts(&accounts)
                 );
             }
 

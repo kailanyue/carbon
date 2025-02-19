@@ -1,4 +1,5 @@
 use carbon_core::{borsh, CarbonDeserialize};
+
 #[derive(
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
@@ -22,14 +23,13 @@ impl carbon_core::deserialize::ArrangeAccounts for DeletePositionBundle {
     type ArrangedAccounts = DeletePositionBundleInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let position_bundle = accounts.get(0)?;
-        let position_bundle_mint = accounts.get(1)?;
-        let position_bundle_token_account = accounts.get(2)?;
-        let position_bundle_owner = accounts.get(3)?;
-        let receiver = accounts.get(4)?;
-        let token_program = accounts.get(5)?;
+        let [position_bundle, position_bundle_mint, position_bundle_token_account, position_bundle_owner, receiver, token_program] =
+            accounts
+        else {
+            return None;
+        };
 
         Some(DeletePositionBundleInstructionAccounts {
             position_bundle: position_bundle.pubkey,

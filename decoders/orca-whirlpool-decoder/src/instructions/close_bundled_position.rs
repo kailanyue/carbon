@@ -24,13 +24,13 @@ impl carbon_core::deserialize::ArrangeAccounts for CloseBundledPosition {
     type ArrangedAccounts = CloseBundledPositionInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let bundled_position = accounts.get(0)?;
-        let position_bundle = accounts.get(1)?;
-        let position_bundle_token_account = accounts.get(2)?;
-        let position_bundle_authority = accounts.get(3)?;
-        let receiver = accounts.get(4)?;
+        let [bundled_position, position_bundle, position_bundle_token_account, position_bundle_authority, receiver] =
+            accounts
+        else {
+            return None;
+        };
 
         Some(CloseBundledPositionInstructionAccounts {
             bundled_position: bundled_position.pubkey,

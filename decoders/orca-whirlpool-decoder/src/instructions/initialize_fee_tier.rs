@@ -25,13 +25,11 @@ impl carbon_core::deserialize::ArrangeAccounts for InitializeFeeTier {
     type ArrangedAccounts = InitializeFeeTierInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let config = accounts.get(0)?;
-        let fee_tier = accounts.get(1)?;
-        let funder = accounts.get(2)?;
-        let fee_authority = accounts.get(3)?;
-        let system_program = accounts.get(4)?;
+        let [config, fee_tier, funder, fee_authority, system_program] = accounts else {
+            return None;
+        };
 
         Some(InitializeFeeTierInstructionAccounts {
             config: config.pubkey,
