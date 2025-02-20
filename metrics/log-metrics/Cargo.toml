@@ -2,15 +2,15 @@
 name = "carbon-log-metrics"
 version = "0.4.1"
 description = "Log Metrics"
-license = "MIT"
-edition = "2021"
+license = { workspace = true }
+edition = { workspace = true }
 
 [dependencies]
 carbon-core = { workspace = true }
 
+async-trait = { workspace = true }
+log = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
-async-trait = "0.1"
-log = "0.4"
 
 [lib]
 crate-type = ["rlib"]

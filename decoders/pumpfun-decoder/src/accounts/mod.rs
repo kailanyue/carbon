@@ -1,7 +1,7 @@
-use carbon_core::account::AccountDecoder;
-use carbon_core::deserialize::CarbonDeserialize;
-
-use super::PumpfunDecoder;
+use {
+    super::PumpfunDecoder,
+    carbon_core::{account::AccountDecoder, deserialize::CarbonDeserialize},
+};
 pub mod bonding_curve;
 pub mod global;
 pub mod last_withdraw;
@@ -12,7 +12,7 @@ pub enum PumpfunAccount {
     BondingCurve(bonding_curve::BondingCurve),
 }
 
-impl AccountDecoder<'_> for PumpfunDecoder { 
+impl AccountDecoder<'_> for PumpfunDecoder {
     type AccountType = PumpfunAccount;
     fn decode_account(
         &self,
