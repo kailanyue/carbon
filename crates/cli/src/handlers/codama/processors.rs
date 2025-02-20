@@ -11,9 +11,8 @@ use crate::{
     instructions::{AccountMetaData, ArgumentData, InstructionData},
     types::{EnumVariantData, EnumVariantFields, FieldData, TypeData, TypeKind},
 };
-use heck::{ToSnakeCase, ToUpperCamelCase};
+use heck::{ToSnakeCase, ToSnekCase, ToUpperCamelCase};
 use std::collections::HashSet;
-
 pub fn process_codama_accounts(program: &ProgramNode) -> Vec<AccountData> {
     let mut accounts_data = Vec::new();
 
