@@ -843,7 +843,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-cli"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "anyhow",
  "askama",
@@ -866,7 +866,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-core"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "borsh 0.10.4",
@@ -887,7 +887,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-drift-v2-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -898,7 +898,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-fluxbeam-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -909,7 +909,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-helius-atlas-ws-datasource"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "bincode",
@@ -928,7 +928,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-jupiter-dca-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -937,7 +937,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-jupiter-limit-order-2-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -946,7 +946,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-jupiter-limit-order-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -955,7 +955,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-jupiter-perpetuals-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -966,7 +966,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-jupiter-swap-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -975,7 +975,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-kamino-lending-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -985,7 +985,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-kamino-vault-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -995,7 +995,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-lifinity-amm-v2-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1006,7 +1006,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-log-metrics"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -1016,7 +1016,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-macros"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "hex",
  "paste",
@@ -1027,7 +1027,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-memo-program-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1038,7 +1038,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-meteora-dlmm-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1048,7 +1048,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-moonshot-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1057,7 +1057,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-mpl-core-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1066,7 +1066,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-mpl-token-metadata-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1075,7 +1075,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-name-service-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1086,7 +1086,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-openbook-v2-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1096,7 +1096,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-orca-whirlpool-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1105,7 +1105,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-phoenix-v1-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1116,7 +1116,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-proc-macros"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "borsh-derive-internal",
  "hex",
@@ -1133,7 +1133,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-prometheus-metrics"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -1145,7 +1145,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-pumpfun-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1154,7 +1154,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-raydium-amm-v4-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1164,7 +1164,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-raydium-clmm-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1175,7 +1175,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-raydium-cpmm-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1186,7 +1186,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-raydium-liquidity-locking-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1197,7 +1197,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-rpc-block-subscribe-datasource"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -1212,7 +1212,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-rpc-program-subscribe-datasource"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -1227,7 +1227,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-rpc-transaction-crawler-datasource"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-stream",
  "async-trait",
@@ -1246,7 +1246,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-sharky-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1256,7 +1256,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-stabble-stable-swap-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1267,7 +1267,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-stabble-weighted-swap-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1278,7 +1278,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-system-program-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1288,7 +1288,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-token-2022-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",
@@ -1300,7 +1300,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-token-program-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "serde",
@@ -1310,7 +1310,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-yellowstone-grpc-datasource"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "async-trait",
  "carbon-core",
@@ -1329,7 +1329,7 @@ dependencies = [
 
 [[package]]
 name = "carbon-zeta-decoder"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "carbon-core",
  "carbon-macros",

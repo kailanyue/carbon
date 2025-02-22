@@ -46,6 +46,10 @@ impl carbon_core::instruction::InstructionDecoder<'_> for SystemProgramDecoder {
         &self,
         instruction: &solana_sdk::instruction::Instruction,
     ) -> Option<carbon_core::instruction::DecodedInstruction<Self::InstructionType>> {
+        if !instruction.program_id.eq(&solana_sdk::system_program::id()) {
+            return None;
+        }
+
         carbon_core::try_decode_instructions!(instruction,
             SystemProgramInstruction::CreateAccount => create_account::CreateAccount,
             SystemProgramInstruction::Assign => assign::Assign,
