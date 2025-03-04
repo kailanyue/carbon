@@ -9,6 +9,10 @@ pub struct Swap {
     pub minimum_amount_out: u64,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xf8c69e91e17587c1")]
 pub struct SwapInstructionAccounts {
     pub authority: solana_sdk::pubkey::Pubkey,
     pub amm: solana_sdk::pubkey::Pubkey,

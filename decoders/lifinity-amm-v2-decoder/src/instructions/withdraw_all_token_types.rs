@@ -10,6 +10,10 @@ pub struct WithdrawAllTokenTypes {
     pub minimum_token_b_amount: u64,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xbdfe9caed209a4d1")]
 pub struct WithdrawAllTokenTypesInstructionAccounts {
     pub amm: solana_sdk::pubkey::Pubkey,
     pub authority: solana_sdk::pubkey::Pubkey,

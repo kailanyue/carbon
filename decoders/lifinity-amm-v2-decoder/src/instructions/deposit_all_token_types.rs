@@ -10,6 +10,10 @@ pub struct DepositAllTokenTypes {
     pub maximum_token_b_amount: u64,
 }
 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x205f453c4b4fcde1")]
 pub struct DepositAllTokenTypesInstructionAccounts {
     pub amm: solana_sdk::pubkey::Pubkey,
     pub authority: solana_sdk::pubkey::Pubkey,
