@@ -11,6 +11,7 @@ pub struct SetParams {
     pub initial_real_token_reserves: u64,
     pub token_total_supply: u64,
     pub fee_basis_points: u64,
+    pub withdraw_authority: solana_sdk::pubkey::Pubkey,
 }
 
 #[derive(

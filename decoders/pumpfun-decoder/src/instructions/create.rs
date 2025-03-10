@@ -8,6 +8,7 @@ pub struct Create {
     pub name: String,
     pub symbol: String,
     pub uri: String,
+    pub creator: solana_sdk::pubkey::Pubkey,
 }
 
 #[derive(
