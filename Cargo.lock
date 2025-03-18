@@ -1068,8 +1068,8 @@ dependencies = [
  "carbon-core",
  "serde",
  "solana-sdk",
- "spl-memo",
- "spl-token",
+ "spl-memo 6.0.0",
+ "spl-token 7.0.0",
 ]
 
 [[package]]
@@ -1298,7 +1298,7 @@ dependencies = [
  "carbon-core",
  "serde",
  "solana-sdk",
- "spl-token",
+ "spl-token 7.0.0",
 ]
 
 [[package]]
@@ -1361,7 +1361,7 @@ dependencies = [
  "carbon-core",
  "serde",
  "solana-sdk",
- "spl-token",
+ "spl-token 7.0.0",
 ]
 
 [[package]]
@@ -1395,7 +1395,7 @@ dependencies = [
  "carbon-core",
  "serde",
  "solana-sdk",
- "spl-token",
+ "spl-token 7.0.0",
 ]
 
 [[package]]
@@ -2582,7 +2582,7 @@ dependencies = [
  "solana-rpc-client-api",
  "solana-sdk",
  "solana-transaction-status",
- "spl-token",
+ "spl-token 6.0.0",
  "thiserror 1.0.69",
  "tokio",
  "tokio-stream",
@@ -5115,7 +5115,7 @@ dependencies = [
  "solana-account-decoder-client-types",
  "solana-config-program",
  "solana-sdk",
- "spl-token",
+ "spl-token 6.0.0",
  "spl-token-2022",
  "spl-token-group-interface",
  "spl-token-metadata-interface",
@@ -6225,8 +6225,8 @@ dependencies = [
  "solana-sdk",
  "solana-transaction-status-client-types",
  "spl-associated-token-account",
- "spl-memo",
- "spl-token",
+ "spl-memo 5.0.0",
+ "spl-token 6.0.0",
  "spl-token-2022",
  "spl-token-group-interface",
  "spl-token-metadata-interface",
@@ -6394,7 +6394,7 @@ dependencies = [
  "num-derive 0.4.2",
  "num-traits",
  "solana-program",
- "spl-token",
+ "spl-token 6.0.0",
  "spl-token-2022",
  "thiserror 1.0.69",
 ]
@@ -6441,6 +6441,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a0dba2f2bb6419523405d21c301a32c9f9568354d4742552e7972af801f4bdb3"
 dependencies = [
  "solana-program",
+]
+
+[[package]]
+name = "spl-memo"
+version = "6.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9f09647c0974e33366efeb83b8e2daebb329f0420149e74d3a4bd2c08cf9f7cb"
+dependencies = [
+ "solana-account-info",
+ "solana-instruction",
+ "solana-msg",
+ "solana-program-entrypoint",
+ "solana-program-error",
+ "solana-pubkey",
 ]
 
 [[package]]
@@ -6512,6 +6526,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "spl-token"
+version = "7.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ed320a6c934128d4f7e54fe00e16b8aeaecf215799d060ae14f93378da6dc834"
+dependencies = [
+ "arrayref",
+ "bytemuck",
+ "num-derive 0.4.2",
+ "num-traits",
+ "num_enum",
+ "solana-program",
+ "thiserror 1.0.69",
+]
+
+[[package]]
 name = "spl-token-2022"
 version = "4.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6525,9 +6554,9 @@ dependencies = [
  "solana-program",
  "solana-security-txt",
  "solana-zk-token-sdk",
- "spl-memo",
+ "spl-memo 5.0.0",
  "spl-pod",
- "spl-token",
+ "spl-token 6.0.0",
  "spl-token-group-interface",
  "spl-token-metadata-interface",
  "spl-transfer-hook-interface",

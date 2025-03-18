@@ -73,8 +73,8 @@ solana-account-decoder = "=2.1.15"
 solana-client = "=2.1.15"
 solana-sdk = "=2.1.15"
 solana-transaction-status = "=2.1.15"
-spl-memo = "5.0.0"
-spl-token = "6.0.0"
+spl-memo = "6.0"
+spl-token = "7.0"
 
 # other
 anyhow = "1.0"
