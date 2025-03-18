@@ -69,10 +69,10 @@ carbon-token-program-decoder = { path = "decoders/token-program-decoder", versio
 carbon-zeta-decoder = { path = "decoders/zeta-decoder", version = "0.6.1" }
 
 # solana
-solana-account-decoder = "=2.1.15"
-solana-client = "=2.1.15"
-solana-sdk = "=2.1.15"
-solana-transaction-status = "=2.1.15"
+solana-account-decoder = "2.2"
+solana-client = "2.2"
+solana-sdk = "2.2"
+solana-transaction-status = "2.2"
 spl-memo = "6.0"
 spl-token = "7.0"
 
@@ -116,8 +116,8 @@ tokio = { version = "1.43" }
 tokio-retry = "0.3"
 tokio-util = "0.7"
 unicode-xid = "0.2"
-yellowstone-grpc-client = { version = "5" }
-yellowstone-grpc-proto = { version = "5" }
+yellowstone-grpc-client = { version = "6" }
+yellowstone-grpc-proto = { version = "6" }
 
 [patch.crates-io.curve25519-dalek]
 git = "https://github.com/anza-xyz/curve25519-dalek.git"
