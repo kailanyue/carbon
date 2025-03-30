@@ -1,6 +1,6 @@
 [package]
 name = "carbon-pumpfun-decoder"
-version = "0.6.1"
+version = "0.7.0"
 description = "Pumpfun Decoder"
 license = { workspace = true }
 edition = { workspace = true }
@@ -15,7 +15,9 @@ crate-type = ["rlib"]
 [dependencies]
 carbon-core = { workspace = true }
 serde = { workspace = true }
-solana-sdk = { workspace = true }
+solana-account = { workspace = true }
+solana-instruction = { workspace = true }
+solana-pubkey = { workspace = true }
 
 [dev-dependencies]
 carbon-test-utils = { workspace = true }

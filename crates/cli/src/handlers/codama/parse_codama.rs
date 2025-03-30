@@ -14,7 +14,7 @@ use {
     },
     anyhow::{bail, Result},
     askama::Template,
-    heck::{ToKebabCase, ToSnakeCase, ToSnekCase, ToUpperCamelCase},
+    heck::{ToKebabCase, ToSnakeCase, ToUpperCamelCase},
     std::fs::{self},
 };
 
@@ -57,12 +57,12 @@ pub fn parse_codama(
         if as_crate {
             format!("{}{}-decoder", output, decoder_name_kebab)
         } else {
-            format!("{}{}_decoder", output, program_name.to_snek_case())
+            format!("{}{}_decoder", output, program_name.to_snake_case())
         }
     } else if as_crate {
         format!("{}/{}-decoder", output, decoder_name_kebab)
     } else {
-        format!("{}/{}_decoder", output, program_name.to_snek_case())
+        format!("{}/{}_decoder", output, program_name.to_snake_case())
     };
 
     fs::create_dir_all(&crate_dir).expect("Failed to create decoder directory");
@@ -95,7 +95,7 @@ pub fn parse_codama(
         println!("Generated {}", filename);
     }
 
-    let mut types_mod_content = types_data
+    let types_mod_content = types_data
         .iter()
         .map(|type_data| {
             format!(
@@ -106,10 +106,6 @@ pub fn parse_codama(
         })
         .collect::<Vec<_>>()
         .join("\n");
-
-    if needs_big_array {
-        types_mod_content.push_str("\nuse serde_big_array::BigArray;\n");
-    }
 
     let types_mod_filename = format!("{}/mod.rs", types_dir);
     fs::write(&types_mod_filename, types_mod_content).expect("Failed to write types mod file");
@@ -187,7 +183,7 @@ pub fn parse_codama(
         let cargo_toml_content = format!(
             r#"[package]
 name = "{decoder_name_kebab}-decoder"
-version = "0.6.1"
+version = "0.7.0"
 edition = {{ workspace = true }}
 
 [lib]

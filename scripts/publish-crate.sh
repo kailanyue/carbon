@@ -9,6 +9,7 @@ workspace_crates=(
     carbon-test-utils
 
     carbon-helius-atlas-ws-datasource
+    carbon-rpc-block-crawler-datasource
     carbon-rpc-block-subscribe-datasource
     carbon-rpc-program-subscribe-datasource
     carbon-rpc-transaction-crawler-datasource
@@ -32,6 +33,7 @@ workspace_crates=(
     carbon-marinade-finance-decoder
     carbon-memo-program-decoder
     carbon-meteora-dlmm-decoder
+    carbon-meteora-pools-decoder
     carbon-moonshot-decoder
     carbon-mpl-core-decoder
     carbon-mpl-token-metadata-decoder
@@ -55,6 +57,7 @@ workspace_crates=(
     carbon-system-program-decoder
     carbon-token-2022-decoder
     carbon-token-program-decoder
+    carbon-virtuals-decoder
     carbon-zeta-decoder
 )
 

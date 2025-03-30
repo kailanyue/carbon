@@ -121,6 +121,8 @@ $ carbon-cli parse [OPTIONS] --idl <IDL> --output <OUTPUT>
 
 #### Examples
 
+##### Generate Decoder
+
 1. To generate a decoder from an Anchor IDL file:
 
 ```sh
@@ -154,6 +156,16 @@ This will parse the my_program_codama.json Codama IDL file and generate the corr
 ```sh
 $ carbon-cli parse --idl my_program_codama.json --output ./src/decoders --standard codama --event-hints event1,event2,event3
 ```
+
+##### Scaffold Project
+
+```sh
+$ carbon-cli scaffold --name degen-paradize --output ./desired-folder --decoders pumpfun,moonshot,raydium-amm-v4 --data-source yellowstone-grpc
+```
+
+or with interactive mode:
+
+![Animated GIF making a demonstration of an scaffolding the project](./assets/scaffold.gif)
 
 ### Implementing Processors
 
@@ -233,6 +245,7 @@ Decoders for most popular Solana programs are published and maintained:
 | `carbon-marinade-finance-decoder`             | Marinade Finance Program Decoder          | MarBmsSgKXdrN1egZf5sqe1TMai9K1rChYNDJgjq7aD  |
 | `carbon-memo-program-decoder`                 | SPL Memo Program Decoder                  | Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo  |
 | `carbon-meteora-dlmm-decoder`                 | Meteora DLMM Program Decoder              | LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo  |
+| `carbon-meteora-pools-decoder`                | Meteora Pools Program Decoder              | Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB  |
 | `carbon-moonshot-decoder`                     | Moonshot Program Decoder                  | MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG  |
 | `carbon-mpl-core-decoder`                     | MPL Core Program Decoder                  | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d |
 | `carbon-mpl-token-metadata-decoder`           | MPL Token Metadata Program Decoder        | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  |
@@ -256,6 +269,7 @@ Decoders for most popular Solana programs are published and maintained:
 | `carbon-system-program-decoder`               | System Program Decoder                    | 11111111111111111111111111111111             |
 | `carbon-token-2022-decoder`                   | Token 2022 Program Decoder                | TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb  |
 | `carbon-token-program-decoder`                | Token Program Decoder                     | TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA  |
+| `carbon-virtuals-decoder`                     | Virtuals Program Decoder                  | 5U3EU2ubXtK84QcRjWVmYt9RaDyA8gKxdUrPFXmZyaki |
 | `carbon-zeta-decoder`                         | Zeta Program Decoder                      | ZETAxsqBRek56DhiGXrn75yj2NHU3aYUnxvHXpkf3aD  |
 
 ## Test
