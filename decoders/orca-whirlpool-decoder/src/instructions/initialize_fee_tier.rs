@@ -14,18 +14,18 @@ pub struct InitializeFeeTier {
 )]
 #[carbon(discriminator = "0xb74a9ca070022a11")]
 pub struct InitializeFeeTierInstructionAccounts {
-    pub config: solana_sdk::pubkey::Pubkey,
-    pub fee_tier: solana_sdk::pubkey::Pubkey,
-    pub funder: solana_sdk::pubkey::Pubkey,
-    pub fee_authority: solana_sdk::pubkey::Pubkey,
-    pub system_program: solana_sdk::pubkey::Pubkey,
+    pub config: solana_pubkey::Pubkey,
+    pub fee_tier: solana_pubkey::Pubkey,
+    pub funder: solana_pubkey::Pubkey,
+    pub fee_authority: solana_pubkey::Pubkey,
+    pub system_program: solana_pubkey::Pubkey,
 }
 
 impl carbon_core::deserialize::ArrangeAccounts for InitializeFeeTier {
     type ArrangedAccounts = InitializeFeeTierInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
+        accounts: &[solana_instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [config, fee_tier, funder, fee_authority, system_program, _remaining @ ..] = accounts
         else {

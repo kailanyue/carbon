@@ -17,17 +17,17 @@ pub struct UpdateFeeParameters {
 )]
 #[carbon(discriminator = "0x8080d05bf6351fb1")]
 pub struct UpdateFeeParametersInstructionAccounts {
-    pub lb_pair: solana_sdk::pubkey::Pubkey,
-    pub admin: solana_sdk::pubkey::Pubkey,
-    pub event_authority: solana_sdk::pubkey::Pubkey,
-    pub program: solana_sdk::pubkey::Pubkey,
+    pub lb_pair: solana_pubkey::Pubkey,
+    pub admin: solana_pubkey::Pubkey,
+    pub event_authority: solana_pubkey::Pubkey,
+    pub program: solana_pubkey::Pubkey,
 }
 
 impl carbon_core::deserialize::ArrangeAccounts for UpdateFeeParameters {
     type ArrangedAccounts = UpdateFeeParametersInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
+        accounts: &[solana_instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [lb_pair, admin, event_authority, program, _remaining @ ..] = accounts else {
             return None;

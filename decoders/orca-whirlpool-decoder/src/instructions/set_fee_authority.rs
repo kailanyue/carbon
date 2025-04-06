@@ -11,16 +11,16 @@ pub struct SetFeeAuthority {}
 )]
 #[carbon(discriminator = "0x1f013257ed656181")]
 pub struct SetFeeAuthorityInstructionAccounts {
-    pub whirlpools_config: solana_sdk::pubkey::Pubkey,
-    pub fee_authority: solana_sdk::pubkey::Pubkey,
-    pub new_fee_authority: solana_sdk::pubkey::Pubkey,
+    pub whirlpools_config: solana_pubkey::Pubkey,
+    pub fee_authority: solana_pubkey::Pubkey,
+    pub new_fee_authority: solana_pubkey::Pubkey,
 }
 
 impl carbon_core::deserialize::ArrangeAccounts for SetFeeAuthority {
     type ArrangedAccounts = SetFeeAuthorityInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
+        accounts: &[solana_instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [whirlpools_config, fee_authority, new_fee_authority, _remaining @ ..] = accounts
         else {

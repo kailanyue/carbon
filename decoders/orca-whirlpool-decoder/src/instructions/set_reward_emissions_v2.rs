@@ -14,16 +14,16 @@ pub struct SetRewardEmissionsV2 {
 )]
 #[carbon(discriminator = "0x72e44820c130a061")]
 pub struct SetRewardEmissionsV2InstructionAccounts {
-    pub whirlpool: solana_sdk::pubkey::Pubkey,
-    pub reward_authority: solana_sdk::pubkey::Pubkey,
-    pub reward_vault: solana_sdk::pubkey::Pubkey,
+    pub whirlpool: solana_pubkey::Pubkey,
+    pub reward_authority: solana_pubkey::Pubkey,
+    pub reward_vault: solana_pubkey::Pubkey,
 }
 
 impl carbon_core::deserialize::ArrangeAccounts for SetRewardEmissionsV2 {
     type ArrangedAccounts = SetRewardEmissionsV2InstructionAccounts;
 
     fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
+        accounts: &[solana_instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [whirlpool, reward_authority, reward_vault, _remaining @ ..] = accounts else {
             return None;

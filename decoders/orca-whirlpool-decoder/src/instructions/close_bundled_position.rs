@@ -13,18 +13,18 @@ pub struct CloseBundledPosition {
 )]
 #[carbon(discriminator = "0x2924d8f51b556741")]
 pub struct CloseBundledPositionInstructionAccounts {
-    pub bundled_position: solana_sdk::pubkey::Pubkey,
-    pub position_bundle: solana_sdk::pubkey::Pubkey,
-    pub position_bundle_token_account: solana_sdk::pubkey::Pubkey,
-    pub position_bundle_authority: solana_sdk::pubkey::Pubkey,
-    pub receiver: solana_sdk::pubkey::Pubkey,
+    pub bundled_position: solana_pubkey::Pubkey,
+    pub position_bundle: solana_pubkey::Pubkey,
+    pub position_bundle_token_account: solana_pubkey::Pubkey,
+    pub position_bundle_authority: solana_pubkey::Pubkey,
+    pub receiver: solana_pubkey::Pubkey,
 }
 
 impl carbon_core::deserialize::ArrangeAccounts for CloseBundledPosition {
     type ArrangedAccounts = CloseBundledPositionInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
+        accounts: &[solana_instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [bundled_position, position_bundle, position_bundle_token_account, position_bundle_authority, receiver, _remaining @ ..] =
             accounts
