@@ -71,8 +71,12 @@ carbon-stake-program-decoder = { path = "decoders/carbon-stake-program-decoder",
 carbon-system-program-decoder = { path = "decoders/system-program-decoder", version = "0.8.0" }
 carbon-token-2022-decoder = { path = "decoders/token-2022-decoder", version = "0.8.0" }
 carbon-token-program-decoder = { path = "decoders/token-program-decoder", version = "0.8.0" }
+carbon-virtual-curve-decoder = { path = "decoders/virtual-curve-decoder", version = "0.8.0" }
 carbon-virtuals-decoder = { path = "decoders/virtuals-decoder", version = "0.8.0" }
 carbon-zeta-decoder = { path = "decoders/zeta-decoder", version = "0.8.0" }
+
+# misc
+carbon-jito-protos = { path = "misc/jito-protos" }
 
 # solana
 solana-account = "2.2"
@@ -80,6 +84,7 @@ solana-account-decoder = "2.2"
 solana-account-decoder-client-types = "2.2"
 solana-client = "2.2"
 solana-clock = "2.2"
+solana-entry = "2.2"
 solana-instruction = { version = "2.2", default-features = false }
 solana-native-token = "2.2"
 solana-program = "2.2"
@@ -116,9 +121,11 @@ indicatif = "0.17"
 inquire = "0.7"
 log = "0.4"
 metrics = "0.24"
-metrics-exporter-prometheus = "0.16"
+metrics-exporter-prometheus = "0.17"
 paste = "1.0"
 proc-macro2 = "1"
+prost = "0.13"
+prost-types = "0.13"
 quote = "1.0"
 retry = "2.0"
 serde = { version = "1.0", features = ["derive"] }
@@ -130,6 +137,8 @@ thiserror = { version = "2.0", default-features = false }
 tokio = { version = "1.44" }
 tokio-retry = "0.3"
 tokio-util = "0.7"
+tonic = { version = "0.12", features = ["tls", "tls-roots", "tls-webpki-roots"] }
+tonic-build = "0.12"
 unicode-xid = "0.2"
 yellowstone-grpc-client = { version = "6" }
 yellowstone-grpc-proto = { version = "6" }
