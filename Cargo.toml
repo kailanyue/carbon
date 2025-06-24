@@ -3,7 +3,6 @@ members = ["crates/*", "datasources/*", "decoders/*", "examples/*", "metrics/*"]
 resolver = "2"
 
 [workspace.package]
-rust-version = "1.82"
 version = "0.8.1"
 edition = "2021"
 license = "MIT"
@@ -12,16 +11,16 @@ repository = "https://github.com/sevenlabs-hq/carbon"
 [workspace.dependencies]
 
 # other
-anyhow = "1.0.96"
-askama = "0.12.1"
-async-stream = "0.3.6"
-async-trait = { version = "0.1.86" }
-axum = "0.8.4"
-base64 = "0.22.1"
-bincode = "1.3.3"
-borsh = { version = "1.5.1" }
-borsh-derive-internal = "0.10.3"
-bs58 = { version = "0.5.1", default-features = false }
+anyhow = "1.0"
+askama = "0.14"
+async-stream = "0.3"
+async-trait = { version = "0.1" }
+axum = "0.8"
+base64 = "0.22"
+bincode = "1.3"
+borsh = { version = "1.5" }
+borsh-derive-internal = "0.10"
+bs58 = { version = "0.5", default-features = false }
 
 # decoders
 carbon-address-lookup-table-decoder = { path = "decoders/address-lookup-table-decoder", version = "0.8.1" }
@@ -95,38 +94,38 @@ carbon-virtual-curve-decoder = { path = "decoders/virtual-curve-decoder", versio
 carbon-virtuals-decoder = { path = "decoders/virtuals-decoder", version = "0.8.1" }
 carbon-yellowstone-grpc-datasource = { path = "datasources/yellowstone-grpc-datasource", version = "0.8.1" }
 carbon-zeta-decoder = { path = "decoders/zeta-decoder", version = "0.8.1" }
-chrono = { version = "0.4.40", features = ["serde"] }
-clap = { version = "4.5.30", features = ["derive"] }
-console = "0.15.8"
-dialoguer = { version = "0.11.0", default-features = false, features = ["editor"] }
-dotenv = "0.15.0"
-env_logger = "0.11.5"
-flate2 = "1.0.35"
-futures = "0.3.30"
-futures-util = "0.3.31"
-heck = "0.5.0"
-helius = { version = "0.2.6", git = "https://github.com/helius-labs/helius-rust-sdk.git" }
-hex = "0.4.3"
-indicatif = "0.17.8"
-inquire = "0.7.5"
-juniper = { version = "0.16.1", features = ["uuid"] }
-juniper_axum = { version = "0.2.0" }
-juniper_codegen = { version = "0.16.0" }
-juniper_graphql_ws = { version = "0.4.0", features = ["graphql-transport-ws"] }
-log = "0.4.25"
-metrics = "0.24.1"
-metrics-exporter-prometheus = "0.16.0"
-paste = "1.0.15"
+chrono = { version = "0.4", features = ["serde"] }
+clap = { version = "4.5", features = ["derive"] }
+console = "0.15"
+dialoguer = { version = "0.11", default-features = false, features = ["editor"] }
+dotenv = "0.15"
+env_logger = "0.11"
+flate2 = "1.0"
+futures = "0.3"
+futures-util = "0.3"
+heck = "0.5"
+helius = { version = "0.2", git = "https://github.com/helius-labs/helius-rust-sdk.git" }
+hex = "0.4"
+indicatif = "0.17"
+inquire = "0.7"
+juniper = { version = "0.16", features = ["uuid"] }
+juniper_axum = { version = "0.2" }
+juniper_codegen = { version = "0.16" }
+juniper_graphql_ws = { version = "0.4", features = ["graphql-transport-ws"] }
+log = "0.4"
+metrics = "0.24"
+metrics-exporter-prometheus = "0.17"
+paste = "1.0"
 proc-macro2 = "1"
-prost = "0.12"
-prost-types = "0.12"
+prost = "0.13"
+prost-types = "0.13"
 quote = "1.0"
-retry = "2.0.0"
-rust_decimal = { version = "1.36.0", features = ["db-postgres"] }
-serde = { version = "1.0.208", features = ["derive"] }
-serde-big-array = "0.5.1"
-serde_json = "1.0.138"
-sha2 = "0.10.8"
+retry = "2.0"
+rust_decimal = { version = "1.37", features = ["db-postgres"] }
+serde = { version = "1.0", features = ["derive"] }
+serde-big-array = "0.5"
+serde_json = "1.0"
+sha2 = "0.10"
 
 # solana
 solana-account = "2.2"
@@ -147,8 +146,8 @@ solana-signature = { version = "2.2", features = ["rand"] }
 solana-transaction = "2.2"
 solana-transaction-context = "2.2"
 solana-transaction-status = "2.2"
-spl-memo = "5.0.0"
-spl-token = "6.0.0"
+spl-memo = "6.0"
+spl-token = "8.0"
 sqlx = { version = "0.8.5", features = [
     "macros",
     "runtime-tokio-rustls",
@@ -157,18 +156,18 @@ sqlx = { version = "0.8.5", features = [
     "chrono",
     "rust_decimal",
 ] }
-sqlx_migrator = { version = "0.17.0", features = ["postgres"] }
+sqlx_migrator = { version = "0.17", features = ["postgres"] }
 syn = { version = "1.0", features = ["full"] }
-thiserror = { version = "2.0.12", default-features = false }
-tokio = { version = "1.43.0", features = ["rt", "time", "signal", "macros"] }
-tokio-retry = "0.3.0"
-tokio-util = "0.7.13"
-tonic = { version = "0.10", features = ["tls", "tls-roots", "tls-webpki-roots"] }
-tonic-build = "0.10"
+thiserror = { version = "2.0", default-features = false }
+tokio = { version = "1.45", features = ["rt", "time", "signal", "macros"] }
+tokio-retry = "0.3"
+tokio-util = "0.7"
+tonic = { version = "0.12", features = ["tls", "tls-roots", "tls-webpki-roots"] }
+tonic-build = "0.12"
 unicode-xid = "0.2"
 uuid = { version = "1.6.1", features = ["serde", "v7"] }
-yellowstone-grpc-client = { version = "6.0.0" }
-yellowstone-grpc-proto = { version = "6.0.0" }
+yellowstone-grpc-client = { version = "6.1" }
+yellowstone-grpc-proto = { version = "6.1" }
 
 [patch.crates-io.curve25519-dalek]
 git = "https://github.com/anza-xyz/curve25519-dalek.git"
