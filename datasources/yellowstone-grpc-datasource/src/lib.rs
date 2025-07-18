@@ -2,7 +2,8 @@ use {
     async_trait::async_trait,
     carbon_core::{
         datasource::{
-            AccountDeletion, AccountUpdate, Datasource, TransactionUpdate, Update, UpdateType,
+            AccountDeletion, AccountUpdate, Datasource, DatasourceId, TransactionUpdate, Update,
+            UpdateType,
         },
         error::CarbonResult,
         metrics::MetricsCollection,
@@ -75,7 +76,8 @@ impl YellowstoneGrpcGeyserClient {
 impl Datasource for YellowstoneGrpcGeyserClient {
     async fn consume(
         &self,
-        sender: Sender<Update>,
+        id: DatasourceId,
+        sender: Sender<(Update, DatasourceId)>,
         cancellation_token: CancellationToken,
         metrics: Arc<MetricsCollection>,
     ) -> CarbonResult<()> {
@@ -118,6 +120,8 @@ impl Datasource for YellowstoneGrpcGeyserClient {
                 from_slot: None,
             };
 
+            let id_for_loop = id.clone();
+
             loop {
                 tokio::select! {
                     _ = cancellation_token.cancelled() => {
@@ -128,6 +132,10 @@ impl Datasource for YellowstoneGrpcGeyserClient {
                         match result {
                             Ok((mut subscribe_tx, mut stream)) => {
                                 while let Some(message) = stream.next().await {
+                                    if cancellation_token.is_cancelled() {
+                                        break;
+                                    }
+
                                     match message {
                                         Ok(msg) => match msg.update_oneof {
                                             Some(UpdateOneof::Account(account_update)) => {
@@ -135,6 +143,7 @@ impl Datasource for YellowstoneGrpcGeyserClient {
                                                     account_update.account,
                                                     &metrics,
                                                     &sender,
+                                                    id_for_loop.clone(),
                                                     account_update.slot,
                                                     &account_deletions_tracked,
                                                 )
@@ -142,14 +151,14 @@ impl Datasource for YellowstoneGrpcGeyserClient {
                                             }
 
                                             Some(UpdateOneof::Transaction(transaction_update)) => {
-                                                send_subscribe_update_transaction_info(transaction_update.transaction, &metrics, &sender, transaction_update.slot, None).await
+                                                send_subscribe_update_transaction_info(transaction_update.transaction, &metrics, &sender, id_for_loop.clone(), transaction_update.slot, None).await
                                             }
                                             Some(UpdateOneof::Block(block_update)) => {
                                                 let block_time = block_update.block_time.map(|ts| ts.timestamp);
 
                                                 for transaction_update in block_update.transactions {
                                                     if retain_block_failed_transactions || transaction_update.meta.as_ref().map(|meta| meta.err.is_none()).unwrap_or(false) {
-                                                        send_subscribe_update_transaction_info(Some(transaction_update), &metrics, &sender, block_update.slot, block_time).await
+                                                        send_subscribe_update_transaction_info(Some(transaction_update), &metrics, &sender, id_for_loop.clone(), block_update.slot, block_time).await
                                                     }
                                                 }
 
@@ -158,6 +167,7 @@ impl Datasource for YellowstoneGrpcGeyserClient {
                                                         Some(account_info),
                                                         &metrics,
                                                         &sender,
+                                                        id_for_loop.clone(),
                                                         block_update.slot,
                                                         &account_deletions_tracked,
                                                     )
@@ -213,7 +223,8 @@ impl Datasource for YellowstoneGrpcGeyserClient {
 async fn send_subscribe_account_update_info(
     account_update_info: Option<SubscribeUpdateAccountInfo>,
     metrics: &MetricsCollection,
-    sender: &Sender<Update>,
+    sender: &Sender<(Update, DatasourceId)>,
+    id: DatasourceId,
     slot: u64,
     account_deletions_tracked: &RwLock<HashSet<Pubkey>>,
 ) {
@@ -246,7 +257,7 @@ async fn send_subscribe_account_update_info(
                     pubkey: account_pubkey,
                     slot,
                 };
-                if let Err(e) = sender.try_send(Update::AccountDeletion(account_deletion)) {
+                if let Err(e) = sender.try_send((Update::AccountDeletion(account_deletion), id)) {
                     log::error!(
                         "Failed to send account deletion update for pubkey {:?} at slot {}: {:?}",
                         account_pubkey,
@@ -262,7 +273,7 @@ async fn send_subscribe_account_update_info(
                 slot,
             });
 
-            if let Err(e) = sender.try_send(update) {
+            if let Err(e) = sender.try_send((update, id)) {
                 log::error!(
                     "Failed to send account update for pubkey {:?} at slot {}: {:?}",
                     account_pubkey,
@@ -292,7 +303,8 @@ async fn send_subscribe_account_update_info(
 async fn send_subscribe_update_transaction_info(
     transaction_info: Option<SubscribeUpdateTransactionInfo>,
     metrics: &MetricsCollection,
-    sender: &Sender<Update>,
+    sender: &Sender<(Update, DatasourceId)>,
+    id: DatasourceId,
     slot: u64,
     block_time: Option<i64>,
 ) {
@@ -327,7 +339,7 @@ async fn send_subscribe_update_transaction_info(
             block_time,
             block_hash: None,
         }));
-        if let Err(e) = sender.try_send(update) {
+        if let Err(e) = sender.try_send((update, id)) {
             log::error!(
                 "Failed to send transaction update with signature {:?} at slot {}: {:?}",
                 signature,

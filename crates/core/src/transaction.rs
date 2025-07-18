@@ -29,7 +29,9 @@
 //!   instructions against the provided schema, only processing the data if it
 //!   conforms to the schema.
 
+use crate::filter::Filter;
 use solana_program::hash::Hash;
+
 use {
     crate::{
         collection::InstructionDecoderCollection,
@@ -63,7 +65,7 @@ use {
 /// - `block_time`: The Unix timestamp of when the transaction was processed.
 ///
 /// Note: The `block_time` field may not be returned in all scenarios.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct TransactionMetadata {
     pub slot: u64,
     pub signature: Signature,
@@ -74,19 +76,6 @@ pub struct TransactionMetadata {
     pub block_hash: Option<Hash>,
 }
 
-impl Default for TransactionMetadata {
-    fn default() -> Self {
-        Self {
-            slot: 0,
-            signature: Signature::new_unique(),
-            fee_payer: Pubkey::new_unique(),
-            meta: solana_transaction_status::TransactionStatusMeta::default(),
-            message: solana_message::VersionedMessage::Legacy(solana_message::Message::default()),
-            block_time: None,
-            block_hash: None,
-        }
-    }
-}
 /// Tries convert transaction update into the metadata.
 ///
 /// This function retrieves core metadata such as the transaction's slot,
@@ -151,9 +140,20 @@ pub type TransactionProcessorInputType<T, U = ()> = (
 /// - `T`: The instruction type, implementing `InstructionDecoderCollection`.
 /// - `U`: The output type for the matched data, if schema-matching,
 ///   implementing `DeserializeOwned`.
+///
+/// ## Fields
+///
+/// - `schema`: The schema against which to match transaction instructions.
+/// - `processor`: The processor that will handle matched transaction data.
+/// - `filters`: A collection of filters that determine which transaction
+///   updates should be processed. Each filter in this collection is applied to
+///   incoming transaction updates, and only updates that pass all filters
+///   (return `true`) will be processed. If this collection is empty, all
+///   updates are processed.
 pub struct TransactionPipe<T: InstructionDecoderCollection, U> {
     schema: Option<TransactionSchema<T>>,
     processor: Box<dyn Processor<InputType = TransactionProcessorInputType<T, U>> + Send + Sync>,
+    filters: Vec<Box<dyn Filter + Send + Sync + 'static>>,
 }
 
 /// Represents a parsed transaction, including its metadata and parsed
@@ -170,6 +170,10 @@ impl<T: InstructionDecoderCollection, U> TransactionPipe<T, U> {
     ///
     /// - `schema`: The schema against which to match transaction instructions.
     /// - `processor`: The processor that will handle matched transaction data.
+    /// - `filters`: A collection of filters for selective processing of
+    ///   transaction updates. Filters can be used to selectively process
+    ///   transactions based on criteria such as datasource ID, transaction
+    ///   type, or other custom logic.
     ///
     /// # Returns
     ///
@@ -181,6 +185,7 @@ impl<T: InstructionDecoderCollection, U> TransactionPipe<T, U> {
             + Send
             + Sync
             + 'static,
+        filters: Vec<Box<dyn Filter + Send + Sync + 'static>>,
     ) -> Self {
         log::trace!(
             "TransactionPipe::new(schema: {:?}, processor: {:?})",
@@ -190,6 +195,7 @@ impl<T: InstructionDecoderCollection, U> TransactionPipe<T, U> {
         Self {
             schema,
             processor: Box::new(processor),
+            filters,
         }
     }
 
@@ -256,33 +262,26 @@ pub fn parse_instructions<T: InstructionDecoderCollection>(
     parsed_instructions
 }
 
-/// Defines an asynchronous trait for processing transactions.
+/// An async trait for processing transactions.
 ///
-/// This trait provides a method for running transaction pipes, handling parsed
-/// instructions with associated metrics, and leveraging `TransactionPipe`
-/// implementations.
+/// The `TransactionPipes` trait allows for processing of transactions.
+///
+/// # Required Methods
+///
+/// - `run`: Processes a transaction and tracks the operation with metrics.
+/// - `filters`: Returns a reference to the filters associated with this pipe,
+///   which are used by the pipeline to determine which transaction updates
+///   should be processed.
 #[async_trait]
 pub trait TransactionPipes<'a>: Send + Sync {
-    /// Runs the transaction pipe with the provided instructions and metrics.
-    ///
-    /// The method parses the instructions, matches them against the schema, and
-    /// processes the matched data asynchronously.
-    ///
-    /// # Parameters
-    ///
-    /// - `instructions`: A slice of `NestedInstruction` containing the
-    ///   transaction instructions.
-    /// - `metrics`: A vector of metrics instances for performance tracking.
-    ///
-    /// # Returns
-    ///
-    /// A `CarbonResult<()>` indicating success or failure.
     async fn run(
         &mut self,
         transaction_metadata: Arc<TransactionMetadata>,
         instructions: &[NestedInstruction],
         metrics: Arc<MetricsCollection>,
     ) -> CarbonResult<()>;
+
+    fn filters(&self) -> &Vec<Box<dyn Filter + Send + Sync + 'static>>;
 }
 
 #[async_trait]
@@ -320,5 +319,9 @@ where
             .await?;
 
         Ok(())
+    }
+
+    fn filters(&self) -> &Vec<Box<dyn Filter + Send + Sync + 'static>> {
+        &self.filters
     }
 }

@@ -7,6 +7,7 @@ workspace_crates=(
     carbon-proc-macros
     carbon-test-utils
     carbon-core
+
     carbon-postgres-client
     carbon-gql-server
 
@@ -34,6 +35,7 @@ workspace_crates=(
     carbon-jupiter-swap-decoder
     carbon-kamino-farms-decoder
     carbon-kamino-lending-decoder
+    carbon-kamino-limit-order-decoder
     carbon-kamino-vault-decoder
     carbon-lifinity-amm-v2-decoder
     carbon-marginfi-v2-decoder
@@ -50,13 +52,14 @@ workspace_crates=(
     carbon-openbook-v2-decoder
     carbon-orca-whirlpool-decoder
     carbon-phoenix-v1-decoder
-    carbon-pumpfun-decoder
     carbon-pump-swap-decoder
+    carbon-pumpfun-decoder
     carbon-raydium-amm-v4-decoder
     carbon-raydium-clmm-decoder
     carbon-raydium-cpmm-decoder
     carbon-raydium-launchpad-decoder
     carbon-raydium-liquidity-locking-decoder
+    carbon-raydium-stable-swap-decoder
     carbon-sharky-decoder
     carbon-solayer-restaking-program-decoder
     carbon-stabble-stable-swap-decoder
@@ -71,7 +74,6 @@ workspace_crates=(
 )
 
 for crate in "${workspace_crates[@]}"; do
-   echo "--- $crate"
-   cargo package -p $crate
-   cargo publish -p $crate
+    echo "--- $crate"
+    cargo publish -p $crate
 done

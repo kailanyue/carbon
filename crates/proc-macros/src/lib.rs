@@ -136,22 +136,23 @@ pub fn carbon_deserialize_derive(input_token_stream: TokenStream) -> TokenStream
 
         #[automatically_derived]
         impl carbon_core::deserialize::CarbonDeserialize for #name {
+            const DISCRIMINATOR: &'static [u8] = #discriminator;
+
             fn deserialize(data: &[u8]) -> Option<Self> {
-                let discriminator: &[u8] = #discriminator;
-                if data.len() < discriminator.len() {
+                if data.len() < Self::DISCRIMINATOR.len() {
                     return None;
                 }
 
 
-                let (disc, mut rest) = data.split_at(discriminator.len());
-                if disc != discriminator {
+                let (disc, mut rest) = data.split_at(Self::DISCRIMINATOR.len());
+                if disc != Self::DISCRIMINATOR {
                     return None;
                 }
 
                  match carbon_core::borsh::BorshDeserialize::deserialize(&mut rest) {
                     Ok(res) => {
                         if !rest.is_empty() {
-                            carbon_core::log::warn!(
+                            carbon_core::log::debug!(
                                 "Not all bytes were read when deserializing {}: {} bytes remaining",
                                 stringify!(#name),
                                 rest.len(),

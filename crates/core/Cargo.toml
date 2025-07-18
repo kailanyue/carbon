@@ -1,6 +1,6 @@
 [package]
 name = "carbon-core"
-version = "0.8.1"
+version = "0.9.1"
 edition = { workspace = true }
 description = "Core library for Carbon"
 license = { workspace = true }
@@ -34,6 +34,7 @@ serde_json = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true }
 tokio-util = { workspace = true }
+uuid = { workspace = true, features = ["v4"] }
 
 # Optional macro dependencies
 carbon-macros = { workspace = true, optional = true }

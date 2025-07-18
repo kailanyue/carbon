@@ -1,7 +1,7 @@
 use {
     async_trait::async_trait,
     carbon_core::{
-        datasource::{Datasource, TransactionUpdate, Update, UpdateType},
+        datasource::{Datasource, DatasourceId, TransactionUpdate, Update, UpdateType},
         error::CarbonResult,
         metrics::MetricsCollection,
         transformers::transaction_metadata_from_original_meta,
@@ -97,6 +97,7 @@ pub struct ConnectionConfig {
     pub max_signature_channel_size: Option<usize>,
     pub max_transaction_channel_size: Option<usize>,
     pub retry_config: RetryConfig,
+    pub blocking_send: bool,
 }
 
 impl ConnectionConfig {
@@ -107,6 +108,7 @@ impl ConnectionConfig {
         retry_config: RetryConfig,
         max_signature_channel_size: Option<usize>, // None will default to 1000
         max_transaction_channel_size: Option<usize>, // None will default to 1000
+        blocking_send: bool,
     ) -> Self {
         ConnectionConfig {
             batch_limit,
@@ -115,6 +117,7 @@ impl ConnectionConfig {
             retry_config,
             max_signature_channel_size,
             max_transaction_channel_size,
+            blocking_send,
         }
     }
 
@@ -126,6 +129,7 @@ impl ConnectionConfig {
             retry_config: RetryConfig::default(),
             max_signature_channel_size: None,
             max_transaction_channel_size: None,
+            blocking_send: false,
         }
     }
 }
@@ -160,7 +164,8 @@ impl RpcTransactionCrawler {
 impl Datasource for RpcTransactionCrawler {
     async fn consume(
         &self,
-        sender: Sender<Update>,
+        id: DatasourceId,
+        sender: Sender<(Update, DatasourceId)>,
         cancellation_token: CancellationToken,
         metrics: Arc<MetricsCollection>,
     ) -> CarbonResult<()> {
@@ -208,9 +213,11 @@ impl Datasource for RpcTransactionCrawler {
         let task_processor = task_processor(
             transaction_receiver,
             sender,
+            id,
             filters,
             cancellation_token.clone(),
             metrics.clone(),
+            self.connection_config.clone(),
         );
 
         tokio::spawn(async move {
@@ -246,7 +253,7 @@ fn signature_fetcher(
 
     tokio::spawn(async move {
         let mut last_fetched_signature = filters.before_signature;
-        let mut until_signature = filters.until_signature;
+        let until_signature = filters.until_signature;
         let mut most_recent_signature: Option<Signature> = None;
         loop {
             tokio::select! {
@@ -272,13 +279,9 @@ fn signature_fetcher(
                                 let start = Instant::now();
 
                                 if signatures.is_empty() {
-                                    last_fetched_signature = None;
-                                    if most_recent_signature.is_some() {
-                                        until_signature = most_recent_signature;
-                                        most_recent_signature = None;
+                                    if last_fetched_signature.is_none() {
+                                        tokio::time::sleep(connection_config.polling_interval).await;
                                     }
-
-                                    tokio::time::sleep(connection_config.polling_interval).await;
                                     break;
                                 }
 
@@ -456,13 +459,16 @@ fn transaction_fetcher(
 
 fn task_processor(
     transaction_receiver: Receiver<(Signature, EncodedConfirmedTransactionWithStatusMeta)>,
-    sender: Sender<Update>,
+    sender: Sender<(Update, DatasourceId)>,
+    id: DatasourceId,
     filters: Filters,
     cancellation_token: CancellationToken,
     metrics: Arc<MetricsCollection>,
+    connection_config: ConnectionConfig,
 ) -> JoinHandle<()> {
     let mut transaction_receiver = transaction_receiver;
     let sender = sender.clone();
+    let id_for_loop = id.clone();
 
     tokio::spawn(async move {
         loop {
@@ -555,9 +561,17 @@ fn task_processor(
                             .unwrap_or_else(|value| log::error!("Error recording metric: {}", value));
 
 
-                    if let Err(e) = sender.try_send(update) {
-                        log::error!("Failed to send update: {:?}", e);
-                        continue;
+                    if connection_config.blocking_send {
+                        if let Err(e) = sender.send((update.clone(), id_for_loop.clone())).await {
+                            log::warn!("Failed to send update: {:?}", e);
+                            continue;
+                        }
+                    }
+                    if !connection_config.blocking_send {
+                        if let Err(e) = sender.try_send((update.clone(), id_for_loop.clone())) {
+                            log::warn!("Failed to send update: {:?}", e);
+                            continue;
+                        }
                     }
                 }
             }
