@@ -127,8 +127,8 @@ proc-macro2 = "1"
 prost = "0.13"
 prost-types = "0.13"
 quote = "1.0"
-retry = "2.0"
 reqwest = { version = "0.12.5", features = ["json"] }
+retry = "2.0"
 rust_decimal = { version = "1.37", features = ["db-postgres"] }
 serde = { version = "1.0", features = ["derive"] }
 serde-big-array = "0.5"
@@ -164,7 +164,7 @@ sqlx = { version = "0.8.5", features = [
     "chrono",
     "rust_decimal",
 ] }
-sqlx_migrator = { version = "0.17", features = ["postgres"] }
+sqlx_migrator = { version = "0.18", features = ["postgres"] }
 syn = { version = "1.0", features = ["full"] }
 thiserror = { version = "2.0", default-features = false }
 tokio = { version = "1.46", features = ["rt", "time", "signal", "macros"] }
